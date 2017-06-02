@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/andreschaffer/event-sourced-bank-service.svg?branch=master)](https://travis-ci.org/andreschaffer/event-sourced-bank-service)
+[![Coverage Status](https://coveralls.io/repos/github/andreschaffer/event-sourced-bank-service/badge.svg?branch=master)](https://coveralls.io/github/andreschaffer/event-sourced-bank-service?branch=master)
 # Event Sourced Bank Service
 ## Introduction
 This project aims to provide examples of how to use Event Sourcing and CQRS applied to a minimalistic bank context.  
