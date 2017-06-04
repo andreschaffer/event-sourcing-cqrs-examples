@@ -1,9 +1,10 @@
 package bankservice.domain.model.account;
 
 import bankservice.domain.model.Aggregate;
-import bankservice.domain.model.EventStream;
+import bankservice.domain.model.Event;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 import static java.math.BigDecimal.ZERO;
@@ -22,7 +23,7 @@ public class Account extends Aggregate {
         applyNewEvent(accountOpenedEvent);
     }
 
-    public Account(UUID id, EventStream eventStream) {
+    public Account(UUID id, List<Event> eventStream) {
         super(id, eventStream);
     }
 

@@ -1,8 +1,9 @@
 package bankservice.domain.model.client;
 
 import bankservice.domain.model.Aggregate;
-import bankservice.domain.model.EventStream;
+import bankservice.domain.model.Event;
 
+import java.util.List;
 import java.util.UUID;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -25,7 +26,7 @@ public class Client extends Aggregate {
         applyNewEvent(clientEnrolledEvent);
     }
 
-    public Client(UUID id, EventStream eventStream) {
+    public Client(UUID id, List<Event> eventStream) {
         super(id, eventStream);
     }
 

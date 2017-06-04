@@ -2,8 +2,8 @@ package bankservice.port.outgoing.adapter.eventstore;
 
 import bankservice.domain.model.Event;
 import bankservice.domain.model.EventStore;
-import bankservice.domain.model.EventStream;
 import bankservice.domain.model.OptimisticLockingException;
+import com.google.common.collect.ImmutableList;
 
 import java.util.List;
 import java.util.Map;
@@ -29,8 +29,7 @@ public class InMemoryEventStore implements EventStore {
     }
 
     @Override
-    public EventStream load(UUID aggregateId) {
-        List<Event> events = eventStore.getOrDefault(aggregateId, emptyList());
-        return new EventStream(events);
+    public List<Event> load(UUID aggregateId) {
+        return ImmutableList.copyOf(eventStore.getOrDefault(aggregateId, emptyList()));
     }
 }

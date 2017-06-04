@@ -1,13 +1,14 @@
 package bankservice.service.account;
 
+import bankservice.domain.model.Event;
 import bankservice.domain.model.EventStore;
-import bankservice.domain.model.EventStream;
 import bankservice.domain.model.OptimisticLockingException;
 import bankservice.domain.model.account.Account;
 import bankservice.domain.model.account.NonSufficientFundsException;
 import bankservice.service.Retrier;
 import com.google.common.eventbus.EventBus;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -30,8 +31,8 @@ public class AccountService {
     }
 
     public Optional<Account> loadAccount(UUID id) {
-        EventStream eventStream = eventStore.load(id);
-        if (eventStream.getEvents().isEmpty()) return Optional.empty();
+        List<Event> eventStream = eventStore.load(id);
+        if (eventStream.isEmpty()) return Optional.empty();
         return Optional.of(new Account(id, eventStream));
     }
 

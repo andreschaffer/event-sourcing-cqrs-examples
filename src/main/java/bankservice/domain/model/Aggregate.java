@@ -12,6 +12,7 @@ import java.util.UUID;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static java.lang.String.format;
+import static java.util.Collections.emptyList;
 
 public abstract class Aggregate {
 
@@ -20,19 +21,17 @@ public abstract class Aggregate {
     private List<Event> newEvents;
 
     protected Aggregate(UUID id) {
-        this(id, 0);
+        this(id, emptyList());
     }
 
-    protected Aggregate(UUID id, EventStream eventStream) {
-        this(id, eventStream.getVersion());
-        eventStream.getEvents().forEach(this::apply);
-    }
-
-    private Aggregate(UUID id, int baseVersion) {
+    protected Aggregate(UUID id, List<Event> eventStream) {
         checkNotNull(id);
-        checkArgument(baseVersion >= 0);
+        checkNotNull(eventStream);
         this.id = id;
-        this.baseVersion = baseVersion;
+        eventStream.forEach(e -> {
+            apply(e);
+            this.baseVersion = e.getVersion();
+        });
         this.newEvents = new ArrayList<>();
     }
 
@@ -41,7 +40,7 @@ public abstract class Aggregate {
                 "New event version '%d' does not match expected next version '%d'",
                 event.getVersion(), getNextVersion());
         apply(event);
-        addNewEvent(event);
+        newEvents.add(event);
     }
 
     private void apply(Event event) {
@@ -55,10 +54,6 @@ public abstract class Aggregate {
             throw new UnsupportedOperationException(
                     format("Aggregate '%s' doesn't apply event type '%s'", this.getClass(), event.getClass()), e);
         }
-    }
-
-    private void addNewEvent(Event event) {
-        newEvents.add(event);
     }
 
     public UUID getId() {

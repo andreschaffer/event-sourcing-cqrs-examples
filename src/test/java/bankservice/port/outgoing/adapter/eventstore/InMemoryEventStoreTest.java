@@ -2,7 +2,6 @@ package bankservice.port.outgoing.adapter.eventstore;
 
 import bankservice.domain.model.Event;
 import bankservice.domain.model.EventStore;
-import bankservice.domain.model.EventStream;
 import bankservice.domain.model.OptimisticLockingException;
 import org.junit.Test;
 
@@ -31,13 +30,11 @@ public class InMemoryEventStoreTest {
         eventStore.store(aggregateId, newArrayList(e2), 1);
         eventStore.store(aggregateId, newArrayList(e3), 2);
 
-        EventStream eventStream = eventStore.load(aggregateId);
-        List<Event> events = eventStream.getEvents();
-        assertThat(events.size(), equalTo(3));
-        assertThat(events.get(0), equalTo(e1));
-        assertThat(events.get(1), equalTo(e2));
-        assertThat(events.get(2), equalTo(e3));
-        assertThat(eventStream.getVersion(), equalTo(3));
+        List<Event> eventStream = eventStore.load(aggregateId);
+        assertThat(eventStream.size(), equalTo(3));
+        assertThat(eventStream.get(0), equalTo(e1));
+        assertThat(eventStream.get(1), equalTo(e2));
+        assertThat(eventStream.get(2), equalTo(e3));
     }
 
     @Test(expected = OptimisticLockingException.class)
@@ -52,8 +49,10 @@ public class InMemoryEventStoreTest {
     }
 
     @Test(expected = UnsupportedOperationException.class)
-    public void loadedEventsListIsImmutable() throws Exception {
-        EventStream eventStream = eventStore.load(randomUUID());
-        eventStream.getEvents().add(mock(Event.class));
+    public void loadedEventStreamIsImmutable() throws Exception {
+        UUID aggregateId = randomUUID();
+        Event e1 = new Event(aggregateId, now(UTC), 1){};
+        eventStore.store(aggregateId, newArrayList(e1), 0);
+        eventStore.load(aggregateId).add(mock(Event.class));
     }
 }

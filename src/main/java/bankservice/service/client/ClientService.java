@@ -1,11 +1,12 @@
 package bankservice.service.client;
 
+import bankservice.domain.model.Event;
 import bankservice.domain.model.EventStore;
-import bankservice.domain.model.EventStream;
 import bankservice.domain.model.OptimisticLockingException;
 import bankservice.domain.model.client.Client;
 import bankservice.service.Retrier;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -32,8 +33,8 @@ public class ClientService {
     }
 
     public Optional<Client> loadClient(UUID id) {
-        EventStream eventStream = eventStore.load(id);
-        if (eventStream.getEvents().isEmpty()) return Optional.empty();
+        List<Event> eventStream = eventStore.load(id);
+        if (eventStream.isEmpty()) return Optional.empty();
         return Optional.of(new Client(id, eventStream));
     }
 
