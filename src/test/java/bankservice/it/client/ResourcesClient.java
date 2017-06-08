@@ -25,8 +25,8 @@ public class ResourcesClient {
     public ResourcesClient(Environment environment, int port) {
         this.client = new JerseyClientBuilder(checkNotNull(environment))
                 .build(ResourcesClient.class.getName())
-                .property(CONNECT_TIMEOUT, 1000)
-                .property(READ_TIMEOUT, 1000)
+                .property(CONNECT_TIMEOUT, 2000)
+                .property(READ_TIMEOUT, 3000)
                 .register(new LoggingFeature(getLogger(DEFAULT_LOGGER_NAME), INFO, PAYLOAD_ANY, 1024));
         this.resourcesUrls = new ResourcesUrls(port);
     }
