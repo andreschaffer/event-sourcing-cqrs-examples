@@ -117,7 +117,7 @@ In this project we use event versioning in two ways:
 - In the write/command side, we use it for protecting ourselves from race conditions via optimistic locking;
 - In the read/query side, we use it for commutative reasons, meaning events can come out of order and we can still handle them properly.
 
-If you are interested in this topic, we recommend reading also about [Lamport timestamps](https://en.wikipedia.org/wiki/Lamport_timestamps).
+If you are interested in this topic, we also recommend reading about [Lamport timestamps](https://en.wikipedia.org/wiki/Lamport_timestamps) as an alternative.
 
 ## Contact information
 If you have any questions or suggestions, please ping us:
