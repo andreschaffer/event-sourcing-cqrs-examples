@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/andreschaffer/event-sourced-bank-service.svg?branch=master)](https://travis-ci.org/andreschaffer/event-sourced-bank-service)
 [![Coverage Status](https://coveralls.io/repos/github/andreschaffer/event-sourced-bank-service/badge.svg?branch=master)](https://coveralls.io/github/andreschaffer/event-sourced-bank-service?branch=master)
+
 # Event Sourced Bank Service
-## Introduction
 This project aims to provide examples of how to use Event Sourcing and CQRS applied to a minimalistic bank context.  
 
 We assume the reader has basic knowledge of Event Sourcing and CQRS concepts.  
@@ -9,43 +9,12 @@ If you want to brush up on the subject we suggest reading:
 - [https://martinfowler.com/eaaDev/EventSourcing.html](https://martinfowler.com/eaaDev/EventSourcing.html)
 - [https://martinfowler.com/bliki/CQRS.html](https://martinfowler.com/eaaDev/EventSourcing.html)
 
-## How to use it
-### Requirements
-- Java 8
-- Maven
-
-### Building the application
-``` mvn clean verify ```
-
-### Starting the application
-``` java -jar target/event-sourced-bank-service-1.0-SNAPSHOT.jar server src/environments/development.yml ```
-
-### Examples of use
-#### Create a client
-``` curl -vvv -X POST -H "Content-Type: application/json" -d '{"name":"Jane Doe", "email":"jane.doe@example.com"}' http://localhost:8080/clients ```
-
-Check the created client from the response 'Location' header
-
-#### Create an account for the client
-``` curl -vvv -X POST -H "Content-Type: application/json" http://localhost:8080/clients/{clientId}/accounts ```
-
-Check the created account from the response 'Location' header
-
-#### Make a deposit to the account
-``` curl -vvv -X POST -H "Content-Type: application/json" -d '{"amount":1000000}' http://localhost:8080/accounts/{accountId}/deposits ```
-
-#### Check that you created a millionare!
-``` curl -vvv http://localhost:8080/accounts/{accountId} ```
-
-#### More operations
-Please check the code.
-
-## Design choices
-### Domain overview
+## Domain overview
 In this minimalistic bank, a _client_ can _open_ one or more _accounts_.  
 On each _account_, the _client_ can _deposit_ or _withdraw_ money.  
 A view of an _account transaction history_ is available to the _client_ along with a _summary of each of the client's accounts_.
 
+## Design choices
 ### Architecture overview
       Event Store   Projections
         +----+        +----+
@@ -119,7 +88,38 @@ In this project we use event versioning in two ways:
 
 If you are interested in this topic, we also recommend reading about [Lamport timestamps](https://en.wikipedia.org/wiki/Lamport_timestamps) as an alternative.
 
-## Contact information
-If you have any questions or suggestions, please ping us:
+## Trying it out
+### Requirements
+- Java 8
+- Maven
+
+### Building the application
+``` mvn clean verify ```
+
+### Starting the application
+``` java -jar target/event-sourced-bank-service-1.0-SNAPSHOT.jar server src/environments/development.yml ```
+
+### Examples of use
+#### Create a client
+``` curl -vvv -X POST -H "Content-Type: application/json" -d '{"name":"Jane Doe", "email":"jane.doe@example.com"}' http://localhost:8080/clients ```
+
+Check the created client from the response 'Location' header
+
+#### Create an account for the client
+``` curl -vvv -X POST -H "Content-Type: application/json" http://localhost:8080/clients/{clientId}/accounts ```
+
+Check the created account from the response 'Location' header
+
+#### Make a deposit to the account
+``` curl -vvv -X POST -H "Content-Type: application/json" -d '{"amount":1000000}' http://localhost:8080/accounts/{accountId}/deposits ```
+
+#### Check that you created a millionare!
+``` curl -vvv http://localhost:8080/accounts/{accountId} ```
+
+#### More operations
+Go ahead and check the code! :)
+
+## Contact
+If you have any questions or suggestions, please ping:
 - André Schaffer ([https://github.com/andreschaffer](https://github.com/andreschaffer), [https://twitter.com/andreschaffer](https://twitter.com/andreschaffer))
 - Dan Eidmark ([https://github.com/daneidmark](https://github.com/daneidmark), [https://twitter.com/daneidmark](https://twitter.com/daneidmark))
