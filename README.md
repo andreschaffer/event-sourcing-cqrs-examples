@@ -1,7 +1,7 @@
-[![Build Status](https://travis-ci.org/andreschaffer/event-sourced-bank-service.svg?branch=master)](https://travis-ci.org/andreschaffer/event-sourced-bank-service)
-[![Coverage Status](https://coveralls.io/repos/github/andreschaffer/event-sourced-bank-service/badge.svg?branch=master)](https://coveralls.io/github/andreschaffer/event-sourced-bank-service?branch=master)
+[![Build Status](https://travis-ci.org/andreschaffer/event-sourcing-cqrs-examples.svg?branch=master)](https://travis-ci.org/andreschaffer/event-sourcing-cqrs-examples)
+[![Coverage Status](https://coveralls.io/repos/github/andreschaffer/event-sourcing-cqrs-examples/badge.svg?branch=master)](https://coveralls.io/github/andreschaffer/event-sourcing-cqrs-examples?branch=master)
 
-# Event Sourced Bank Service
+# Event Sourcing and CQRS Examples
 This project aims to provide examples of how to use Event Sourcing and CQRS applied to a minimalistic bank context.  
 
 We assume the reader has basic knowledge of Event Sourcing and CQRS concepts.  
@@ -97,7 +97,7 @@ If you are interested in this topic, we also recommend reading about [Lamport ti
 ``` mvn clean verify ```
 
 ### Starting the application
-``` java -jar target/event-sourced-bank-service-1.0-SNAPSHOT.jar server src/environments/development.yml ```
+``` java -jar target/bank-service-1.0-SNAPSHOT.jar server src/environments/development.yml ```
 
 ### Examples of use
 #### Create a client
