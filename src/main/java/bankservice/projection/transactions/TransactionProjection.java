@@ -1,4 +1,4 @@
-package bankservice.projection.accounttransactions;
+package bankservice.projection.transactions;
 
 import org.joda.time.DateTime;
 

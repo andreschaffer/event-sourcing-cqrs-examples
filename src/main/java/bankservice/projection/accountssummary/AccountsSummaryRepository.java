@@ -1,10 +1,10 @@
-package bankservice.projection.clientaccountssummary;
+package bankservice.projection.accountssummary;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
-public interface ClientAccountsSummaryRepository {
+public interface AccountsSummaryRepository {
 
     void addNewAccount(UUID clientId, UUID accountId, BigDecimal balance, int version);
 

@@ -1,4 +1,4 @@
-package bankservice.projection.clientaccountssummary;
+package bankservice.projection.accountssummary;
 
 import bankservice.domain.model.account.AccountDepositedEvent;
 import bankservice.domain.model.account.AccountOpenedEvent;
@@ -7,30 +7,30 @@ import com.google.common.eventbus.Subscribe;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class ClientAccountsSummaryListener {
+public class AccountsSummaryListener {
 
-    private final ClientAccountsSummaryRepository clientAccountsSummaryRepository;
+    private final AccountsSummaryRepository accountsSummaryRepository;
 
-    public ClientAccountsSummaryListener(ClientAccountsSummaryRepository clientAccountsSummaryRepository) {
-        this.clientAccountsSummaryRepository = checkNotNull(clientAccountsSummaryRepository);
+    public AccountsSummaryListener(AccountsSummaryRepository accountsSummaryRepository) {
+        this.accountsSummaryRepository = checkNotNull(accountsSummaryRepository);
     }
 
     @Subscribe
     @SuppressWarnings("unused")
     public void handle(AccountOpenedEvent event) {
-        clientAccountsSummaryRepository.addNewAccount(
+        accountsSummaryRepository.addNewAccount(
                 event.getClientId(), event.getAggregateId(), event.getBalance(), event.getVersion());
     }
 
     @Subscribe
     @SuppressWarnings("unused")
     public void handle(AccountDepositedEvent event) {
-        clientAccountsSummaryRepository.updateBalance(event.getAggregateId(), event.getBalance(), event.getVersion());
+        accountsSummaryRepository.updateBalance(event.getAggregateId(), event.getBalance(), event.getVersion());
     }
 
     @Subscribe
     @SuppressWarnings("unused")
     public void handle(AccountWithdrawnEvent event) {
-        clientAccountsSummaryRepository.updateBalance(event.getAggregateId(), event.getBalance(), event.getVersion());
+        accountsSummaryRepository.updateBalance(event.getAggregateId(), event.getBalance(), event.getVersion());
     }
 }

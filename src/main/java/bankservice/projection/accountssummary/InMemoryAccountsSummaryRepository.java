@@ -1,4 +1,4 @@
-package bankservice.projection.clientaccountssummary;
+package bankservice.projection.accountssummary;
 
 import com.google.common.collect.ImmutableList;
 
@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import static java.util.Collections.emptyMap;
 
-public class InMemoryClientAccountsSummaryRepository implements ClientAccountsSummaryRepository {
+public class InMemoryAccountsSummaryRepository implements AccountsSummaryRepository {
 
     private final Map<UUID, Map<UUID, AccountProjection>> clientAccounts = new ConcurrentHashMap<>();
     private final Map<UUID, UUID> accountClientIndex = new ConcurrentHashMap<>();

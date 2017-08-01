@@ -1,4 +1,4 @@
-package bankservice.projection.clientaccountssummary;
+package bankservice.projection.accountssummary;
 
 import java.math.BigDecimal;
 import java.util.UUID;

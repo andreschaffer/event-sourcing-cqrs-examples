@@ -1,4 +1,4 @@
-package bankservice.projection.accounttransactions;
+package bankservice.projection.transactions;
 
 import java.util.List;
 import java.util.Map;
@@ -11,21 +11,22 @@ import static java.util.Collections.emptyList;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 
-public class InMemoryAccountTransactionsRepository implements AccountTransactionsRepository {
+public class InMemoryTransactionsRepository implements TransactionsRepository {
 
-    private Map<UUID, List<TransactionProjection>> transactions = new ConcurrentHashMap<>();
+    private Map<UUID, List<TransactionProjection>> accountTransactions = new ConcurrentHashMap<>();
 
     @Override
     public List<TransactionProjection> listByAccount(UUID accountId) {
-        return transactions.getOrDefault(accountId, emptyList()).stream()
+        return accountTransactions.getOrDefault(accountId, emptyList()).stream()
                 .sorted(comparing(TransactionProjection::getVersion))
                 .collect(toList());
     }
 
     @Override
     public void save(TransactionProjection transactionProjection) {
-        transactions.merge(
-            transactionProjection.getAccountId(), newArrayList(transactionProjection),
-                (oldValue, value) -> Stream.concat(oldValue.stream(), value.stream()).collect(toList()));
+        accountTransactions.merge(
+            transactionProjection.getAccountId(),
+            newArrayList(transactionProjection),
+            (oldValue, value) -> Stream.concat(oldValue.stream(), value.stream()).collect(toList()));
     }
 }

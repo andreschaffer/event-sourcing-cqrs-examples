@@ -1,4 +1,4 @@
-package bankservice.projection.clientaccountssummary;
+package bankservice.projection.accountssummary;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
@@ -15,17 +15,17 @@ import javax.ws.rs.core.Response;
 @Consumes(APPLICATION_JSON)
 @Produces(APPLICATION_JSON)
 @Path("clients/{id}/accounts/summary")
-public class ClientAccountsSummaryResource {
+public class AccountsSummaryResource {
 
-    private final ClientAccountsSummaryRepository clientAccountsSummaryRepository;
+    private final AccountsSummaryRepository accountsSummaryRepository;
 
-    public ClientAccountsSummaryResource(ClientAccountsSummaryRepository clientAccountsSummaryRepository) {
-        this.clientAccountsSummaryRepository = checkNotNull(clientAccountsSummaryRepository);
+    public AccountsSummaryResource(AccountsSummaryRepository accountsSummaryRepository) {
+        this.accountsSummaryRepository = checkNotNull(accountsSummaryRepository);
     }
 
     @GET
     public Response get(@PathParam("id") UUIDParam clientId) {
-        List<AccountProjection> accounts = clientAccountsSummaryRepository.getAccounts(clientId.get());
+        List<AccountProjection> accounts = accountsSummaryRepository.getAccounts(clientId.get());
         return Response.ok(accounts).build();
     }
 }
