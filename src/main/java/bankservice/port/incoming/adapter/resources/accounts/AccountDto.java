@@ -15,7 +15,6 @@ public class AccountDto {
     @JsonProperty(access = READ_ONLY)
     private BigDecimal balance;
 
-    @JsonProperty(access = READ_ONLY)
     private UUID clientId;
 
     @SuppressWarnings("unused")

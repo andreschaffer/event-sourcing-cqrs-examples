@@ -7,18 +7,17 @@ import static javax.ws.rs.core.UriBuilder.fromResource;
 import bankservice.domain.model.account.Account;
 import bankservice.service.account.AccountService;
 import bankservice.service.account.OpenAccountCommand;
-import io.dropwizard.jersey.params.UUIDParam;
 import java.net.URI;
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 @Consumes(APPLICATION_JSON)
 @Produces(APPLICATION_JSON)
-@Path("/clients/{id}/accounts")
+@Path("/accounts")
 public class AccountsResource {
 
     private final AccountService accountService;
@@ -28,8 +27,8 @@ public class AccountsResource {
     }
 
     @POST
-    public Response post(@PathParam("id") UUIDParam clientId) {
-        OpenAccountCommand command = new OpenAccountCommand(clientId.get());
+    public Response post(@Valid AccountDto accountDto) {
+        OpenAccountCommand command = new OpenAccountCommand(accountDto.getClientId());
         Account account = accountService.process(command);
         URI accountUri = fromResource(AccountResource.class).build(account.getId());
         return Response.created(accountUri).build();

@@ -36,7 +36,7 @@ public class StateSetup {
     }
 
     public String newAccount(String clientId) {
-        Response response = resourcesClient.postAccount(clientId);
+        Response response = resourcesClient.postAccount(resourcesDtos.accountDto(clientId));
         response.close();
         assertThat(response.getStatus(), equalTo(201));
         Map<String, String> params = new HashMap<>();

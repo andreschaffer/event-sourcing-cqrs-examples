@@ -65,7 +65,7 @@ public class BankServiceApplication extends Application<Configuration> {
         EventStore eventStore = new InMemoryEventStore();
         EventBus eventBus = new AsyncEventBus(newSingleThreadExecutor());
 
-        // write model
+        // domain model
         AccountService accountService = new AccountService(eventStore, eventBus);
         environment.jersey().register(new AccountsResource(accountService));
         environment.jersey().register(new AccountResource(accountService));

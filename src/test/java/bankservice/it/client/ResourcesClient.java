@@ -35,8 +35,8 @@ public class ResourcesClient {
         return resourcesUrls;
     }
 
-    public Response postAccount(String clientId) {
-        return client.target(resourcesUrls.accountsUrl(clientId)).request().post(json(null));
+    public Response postAccount(JsonNode accountDto) {
+        return client.target(resourcesUrls.accountsUrl()).request().post(json(accountDto));
     }
 
     public Response getAccount(String accountId) {

@@ -15,7 +15,7 @@ public class AccountsIT extends BaseIT {
     @Test
     public void newAccount() throws Exception {
         String clientId = stateSetup.newClient("John", "john@example.com");
-        Response response = resourcesClient.postAccount(clientId);
+        Response response = resourcesClient.postAccount(resourcesDtos.accountDto(clientId));
         response.close();
         assertThat(response.getStatus(), equalTo(201));
         UriTemplate accountUriTemplate = resourcesClient.getResourcesUrls().accountUriTemplate();
