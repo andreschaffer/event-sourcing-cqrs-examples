@@ -1,5 +1,9 @@
 package bankservice.service.account;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+import static java.util.Collections.singletonList;
+import static java.util.UUID.randomUUID;
+
 import bankservice.domain.model.Event;
 import bankservice.domain.model.EventStore;
 import bankservice.domain.model.OptimisticLockingException;
@@ -7,15 +11,10 @@ import bankservice.domain.model.account.Account;
 import bankservice.domain.model.account.NonSufficientFundsException;
 import bankservice.service.Retrier;
 import com.google.common.eventbus.EventBus;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Consumer;
-
-import static com.google.common.base.Preconditions.checkNotNull;
-import static java.util.Collections.singletonList;
-import static java.util.UUID.randomUUID;
 
 public class AccountService {
 
@@ -56,8 +55,7 @@ public class AccountService {
 
         return conflictRetrier.get(() -> {
             Optional<Account> possibleAccount = loadAccount(accountId);
-            if (!possibleAccount.isPresent()) throw new AccountNotFoundException(accountId);
-            Account account = possibleAccount.get();
+            Account account = possibleAccount.orElseThrow(() -> new AccountNotFoundException(accountId));
             consumer.accept(account);
             storeAndPublishEvents(account);
             return account;

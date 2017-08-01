@@ -1,19 +1,18 @@
 package bankservice.service.client;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+import static java.util.Collections.singletonList;
+import static java.util.UUID.randomUUID;
+
 import bankservice.domain.model.Event;
 import bankservice.domain.model.EventStore;
 import bankservice.domain.model.OptimisticLockingException;
 import bankservice.domain.model.client.Client;
 import bankservice.service.Retrier;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Consumer;
-
-import static com.google.common.base.Preconditions.checkNotNull;
-import static java.util.Collections.singletonList;
-import static java.util.UUID.randomUUID;
 
 public class ClientService {
 
@@ -47,8 +46,7 @@ public class ClientService {
 
         return conflictRetrier.get(() -> {
             Optional<Client> possibleClient = loadClient(clientId);
-            if (!possibleClient.isPresent()) throw new ClientNotFoundException(clientId);
-            Client client = possibleClient.get();
+            Client client = possibleClient.orElseThrow(() -> new ClientNotFoundException(clientId));
             consumer.accept(client);
             storeEvents(client);
             return client;
