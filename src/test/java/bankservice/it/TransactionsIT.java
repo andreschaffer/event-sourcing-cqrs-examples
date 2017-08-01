@@ -8,13 +8,12 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
-import bankservice.it.BaseIT;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import javax.ws.rs.core.Response;
 import org.junit.Test;
 
-public class AccountTransactionsIT extends BaseIT {
+public class TransactionsIT extends BaseIT {
 
     @Test
     public void returnEmptyTransactions() throws Exception {

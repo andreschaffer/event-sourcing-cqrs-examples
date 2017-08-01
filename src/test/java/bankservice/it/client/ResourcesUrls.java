@@ -58,7 +58,7 @@ public class ResourcesUrls {
         return new UriTemplate(format("http://localhost:%d/clients/{id}", port));
     }
 
-    public URI clientAccountsUrl(String clientId) {
+    public URI accountsUrl(String clientId) {
         return fromUri("http://localhost").port(port).path("clients").path("{id}").path("accounts").build(clientId);
     }
 }

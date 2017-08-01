@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import javax.ws.rs.core.Response;
 import org.junit.Test;
 
-public class AccountDepositsIT extends BaseIT {
+public class DepositsIT extends BaseIT {
 
     @Test
     public void returnAccountNotFound() throws Exception {

@@ -11,7 +11,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 import javax.ws.rs.core.Response;
 import org.glassfish.jersey.uri.UriTemplate;
 
@@ -37,7 +36,7 @@ public class StateSetup {
     }
 
     public String newAccount(String clientId) {
-        Response response = resourcesClient.postClientAccount(clientId);
+        Response response = resourcesClient.postAccount(clientId);
         response.close();
         assertThat(response.getStatus(), equalTo(201));
         Map<String, String> params = new HashMap<>();

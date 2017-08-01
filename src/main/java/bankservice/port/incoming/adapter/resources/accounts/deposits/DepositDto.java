@@ -1,4 +1,4 @@
-package bankservice.port.incoming.adapter.resources.accounts.deposit;
+package bankservice.port.incoming.adapter.resources.accounts.deposits;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

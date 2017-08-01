@@ -1,4 +1,4 @@
-package bankservice.port.incoming.adapter.resources.accounts.withdrawal;
+package bankservice.port.incoming.adapter.resources.accounts.withdrawals;
 
 import bankservice.domain.model.OptimisticLockingException;
 import bankservice.domain.model.account.NonSufficientFundsException;
@@ -18,11 +18,11 @@ import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
 @Consumes(APPLICATION_JSON)
 @Produces(APPLICATION_JSON)
 @Path("/accounts/{id}/withdrawals")
-public class AccountWithdrawalsResource {
+public class WithdrawalsResource {
 
     private final AccountService accountService;
 
-    public AccountWithdrawalsResource(AccountService accountService) {
+    public WithdrawalsResource(AccountService accountService) {
         this.accountService = checkNotNull(accountService);
     }
 

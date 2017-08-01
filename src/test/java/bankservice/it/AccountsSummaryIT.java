@@ -6,7 +6,6 @@ import static java.util.Collections.emptyMap;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-import bankservice.it.BaseIT;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -15,7 +14,7 @@ import java.util.UUID;
 import javax.ws.rs.core.Response;
 import org.junit.Test;
 
-public class ClientAccountsSummaryIT extends BaseIT {
+public class AccountsSummaryIT extends BaseIT {
 
     @Test
     public void returnSummary() throws Exception {

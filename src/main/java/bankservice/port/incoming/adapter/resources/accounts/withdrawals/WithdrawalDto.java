@@ -1,4 +1,4 @@
-package bankservice.port.incoming.adapter.resources.accounts.withdrawal;
+package bankservice.port.incoming.adapter.resources.accounts.withdrawals;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

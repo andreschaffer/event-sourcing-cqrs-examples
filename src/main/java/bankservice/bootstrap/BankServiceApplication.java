@@ -11,12 +11,12 @@ import bankservice.projection.transactions.TransactionsRepository;
 import bankservice.port.incoming.adapter.resources.OptimisticLockingExceptionMapper;
 import bankservice.port.incoming.adapter.resources.accounts.AccountNotFoundExceptionMapper;
 import bankservice.port.incoming.adapter.resources.accounts.AccountResource;
-import bankservice.port.incoming.adapter.resources.accounts.deposit.AccountDepositsResource;
+import bankservice.port.incoming.adapter.resources.accounts.deposits.DepositsResource;
 import bankservice.projection.transactions.TransactionsResource;
-import bankservice.port.incoming.adapter.resources.accounts.withdrawal.AccountWithdrawalsResource;
+import bankservice.port.incoming.adapter.resources.accounts.withdrawals.WithdrawalsResource;
 import bankservice.port.incoming.adapter.resources.clients.ClientResource;
 import bankservice.port.incoming.adapter.resources.clients.ClientsResource;
-import bankservice.port.incoming.adapter.resources.clients.accounts.ClientAccountsResource;
+import bankservice.port.incoming.adapter.resources.accounts.AccountsResource;
 import bankservice.port.outgoing.adapter.eventstore.InMemoryEventStore;
 import bankservice.projection.accountssummary.InMemoryAccountsSummaryRepository;
 import bankservice.projection.transactions.InMemoryTransactionsRepository;
@@ -67,10 +67,10 @@ public class BankServiceApplication extends Application<Configuration> {
 
         // write model
         AccountService accountService = new AccountService(eventStore, eventBus);
-        environment.jersey().register(new ClientAccountsResource(accountService));
+        environment.jersey().register(new AccountsResource(accountService));
         environment.jersey().register(new AccountResource(accountService));
-        environment.jersey().register(new AccountDepositsResource(accountService));
-        environment.jersey().register(new AccountWithdrawalsResource(accountService));
+        environment.jersey().register(new DepositsResource(accountService));
+        environment.jersey().register(new WithdrawalsResource(accountService));
 
         ClientService clientService = new ClientService(eventStore);
         environment.jersey().register(new ClientsResource(clientService));
@@ -81,8 +81,7 @@ public class BankServiceApplication extends Application<Configuration> {
         eventBus.register(new TransactionsListener(transactionsRepository));
         environment.jersey().register(new TransactionsResource(transactionsRepository));
 
-        AccountsSummaryRepository accountsSummaryRepository =
-            new InMemoryAccountsSummaryRepository();
+        AccountsSummaryRepository accountsSummaryRepository = new InMemoryAccountsSummaryRepository();
         eventBus.register(new AccountsSummaryListener(accountsSummaryRepository));
         environment.jersey().register(new AccountsSummaryResource(accountsSummaryRepository));
     }

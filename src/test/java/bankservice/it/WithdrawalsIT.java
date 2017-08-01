@@ -13,7 +13,7 @@ import static java.util.UUID.randomUUID;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-public class AccountWithdrawalsIT extends BaseIT {
+public class WithdrawalsIT extends BaseIT {
 
     @Test
     public void returnAccountNotFound() throws Exception {
