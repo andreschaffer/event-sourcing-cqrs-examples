@@ -1,11 +1,11 @@
-package bankservice.projection.transactions;
+package bankservice.projection.accounttransactions;
 
 import org.junit.Test;
 
 import java.util.List;
 import java.util.UUID;
 
-import static bankservice.projection.transactions.TransactionProjection.TransactionType.DEPOSIT;
+import static bankservice.projection.accounttransactions.TransactionProjection.TransactionType.DEPOSIT;
 import static java.math.BigDecimal.ONE;
 import static java.math.BigDecimal.TEN;
 import static java.util.UUID.randomUUID;

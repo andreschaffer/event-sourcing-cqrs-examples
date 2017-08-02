@@ -15,16 +15,6 @@ public class ResourcesDtos {
         this.objectMapper = checkNotNull(objectMapper);
     }
 
-    public ObjectNode depositDto(BigDecimal amount) {
-        ObjectNode newAccountDto = objectMapper.createObjectNode();
-        return newAccountDto.put("amount", amount.doubleValue());
-    }
-
-    public ObjectNode withdrawalDto(BigDecimal amount) {
-        ObjectNode newAccountDto = objectMapper.createObjectNode();
-        return newAccountDto.put("amount", amount.doubleValue());
-    }
-
     public ObjectNode clientDto(String name, String email) {
         ObjectNode newClientDto = objectMapper.createObjectNode();
         return newClientDto.put("name", name).put("email", email);
@@ -33,5 +23,15 @@ public class ResourcesDtos {
     public JsonNode accountDto(String clientId) {
         ObjectNode newAccountDto = objectMapper.createObjectNode();
         return newAccountDto.put("clientId", clientId);
+    }
+
+    public ObjectNode depositDto(BigDecimal amount) {
+        ObjectNode newAccountDto = objectMapper.createObjectNode();
+        return newAccountDto.put("amount", amount.doubleValue());
+    }
+
+    public ObjectNode withdrawalDto(BigDecimal amount) {
+        ObjectNode newAccountDto = objectMapper.createObjectNode();
+        return newAccountDto.put("amount", amount.doubleValue());
     }
 }

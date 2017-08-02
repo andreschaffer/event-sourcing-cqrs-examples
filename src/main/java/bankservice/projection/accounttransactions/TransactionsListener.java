@@ -1,7 +1,7 @@
-package bankservice.projection.transactions;
+package bankservice.projection.accounttransactions;
 
-import static bankservice.projection.transactions.TransactionProjection.TransactionType.DEPOSIT;
-import static bankservice.projection.transactions.TransactionProjection.TransactionType.WITHDRAWAL;
+import static bankservice.projection.accounttransactions.TransactionProjection.TransactionType.DEPOSIT;
+import static bankservice.projection.accounttransactions.TransactionProjection.TransactionType.WITHDRAWAL;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import bankservice.domain.model.account.AccountDepositedEvent;

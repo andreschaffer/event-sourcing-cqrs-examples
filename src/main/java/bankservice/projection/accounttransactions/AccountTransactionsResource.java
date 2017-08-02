@@ -1,4 +1,4 @@
-package bankservice.projection.transactions;
+package bankservice.projection.accounttransactions;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -13,11 +13,11 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
 @Produces(APPLICATION_JSON)
 @Path("/accounts/{id}/transactions")
-public class TransactionsResource {
+public class AccountTransactionsResource {
 
     private TransactionsRepository transactionsRepository;
 
-    public TransactionsResource(TransactionsRepository transactionsRepository) {
+    public AccountTransactionsResource(TransactionsRepository transactionsRepository) {
         this.transactionsRepository = checkNotNull(transactionsRepository);
     }
 

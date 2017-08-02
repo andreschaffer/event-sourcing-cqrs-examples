@@ -12,7 +12,7 @@ If you want to brush up on the subject we suggest reading:
 ## Domain overview
 In this minimalistic bank, a _client_ can _open_ one or more _accounts_.  
 On each _account_, the _client_ can _deposit_ or _withdraw_ money.  
-A view of an _account transaction history_ is available to the _client_ along with a _summary of each of the client's accounts_.
+The history of an _account's transactions_ is available to the _client_ as well as a summary of the _client's accounts_.
 
 ## Design choices
 ### Architecture overview
@@ -106,7 +106,7 @@ If you are interested in this topic, we also recommend reading about [Lamport ti
 Check the created client from the response 'Location' header
 
 #### Create an account for the client
-` curl -vvv -X POST -H "Content-Type: application/json" -d '{"clientId":clientId}' http://localhost:8080/accounts `
+` curl -vvv -X POST -H "Content-Type: application/json" -d '{"clientId":"{clientId}"}' http://localhost:8080/accounts `
 
 Check the created account from the response 'Location' header
 

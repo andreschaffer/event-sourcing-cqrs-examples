@@ -35,6 +35,18 @@ public class ResourcesClient {
         return resourcesUrls;
     }
 
+    public Response postClient(JsonNode clientDto) {
+        return client.target(resourcesUrls.clientsUrl()).request().post(json(clientDto));
+    }
+
+    public Response getClient(String clientId) {
+        return client.target(resourcesUrls.clientUrl(clientId)).request().get();
+    }
+
+    public Response putClient(String clientId, JsonNode clientDto) {
+        return client.target(resourcesUrls.clientUrl(clientId)).request().put(json(clientDto));
+    }
+
     public Response postAccount(JsonNode accountDto) {
         return client.target(resourcesUrls.accountsUrl()).request().post(json(accountDto));
     }
@@ -51,23 +63,11 @@ public class ResourcesClient {
         return client.target(resourcesUrls.withdrawalsUrl(accountId)).request().post(json(withdrawalDto));
     }
 
-    public Response getAccountsSummary(String clientId) {
-        return client.target(resourcesUrls.accountsSummaryUrl(clientId)).request().get();
+    public Response getClientAccounts(String clientId) {
+        return client.target(resourcesUrls.clientAccountsUrl(clientId)).request().get();
     }
 
-    public Response getTransactions(String accountId) {
-        return client.target(resourcesUrls.transactionsUrl(accountId)).request().get();
-    }
-
-    public Response postClient(JsonNode clientDto) {
-        return client.target(resourcesUrls.clientsUrl()).request().post(json(clientDto));
-    }
-
-    public Response getClient(String clientId) {
-        return client.target(resourcesUrls.clientUrl(clientId)).request().get();
-    }
-
-    public Response putClient(String clientId, JsonNode clientDto) {
-        return client.target(resourcesUrls.clientUrl(clientId)).request().put(json(clientDto));
+    public Response getAccountTransactions(String accountId) {
+        return client.target(resourcesUrls.accountTransactionsUrl(accountId)).request().get();
     }
 }

@@ -7,25 +7,25 @@ import static org.glassfish.jersey.logging.LoggingFeature.DEFAULT_LOGGER_NAME;
 import static org.glassfish.jersey.logging.LoggingFeature.Verbosity.PAYLOAD_ANY;
 
 import bankservice.domain.model.EventStore;
-import bankservice.projection.transactions.TransactionsRepository;
+import bankservice.projection.accounttransactions.TransactionsRepository;
 import bankservice.port.incoming.adapter.resources.OptimisticLockingExceptionMapper;
 import bankservice.port.incoming.adapter.resources.accounts.AccountNotFoundExceptionMapper;
 import bankservice.port.incoming.adapter.resources.accounts.AccountResource;
 import bankservice.port.incoming.adapter.resources.accounts.deposits.DepositsResource;
-import bankservice.projection.transactions.TransactionsResource;
+import bankservice.projection.accounttransactions.AccountTransactionsResource;
 import bankservice.port.incoming.adapter.resources.accounts.withdrawals.WithdrawalsResource;
 import bankservice.port.incoming.adapter.resources.clients.ClientResource;
 import bankservice.port.incoming.adapter.resources.clients.ClientsResource;
 import bankservice.port.incoming.adapter.resources.accounts.AccountsResource;
 import bankservice.port.outgoing.adapter.eventstore.InMemoryEventStore;
-import bankservice.projection.accountssummary.InMemoryAccountsSummaryRepository;
-import bankservice.projection.transactions.InMemoryTransactionsRepository;
-import bankservice.projection.accountssummary.AccountsSummaryListener;
-import bankservice.projection.accountssummary.AccountsSummaryRepository;
-import bankservice.projection.accountssummary.AccountsSummaryResource;
+import bankservice.projection.clientaccounts.InMemoryAccountsRepository;
+import bankservice.projection.accounttransactions.InMemoryTransactionsRepository;
+import bankservice.projection.clientaccounts.AccountsListener;
+import bankservice.projection.clientaccounts.AccountsRepository;
+import bankservice.projection.clientaccounts.ClientAccountsResource;
 import bankservice.service.account.AccountService;
 import bankservice.service.client.ClientService;
-import bankservice.projection.transactions.TransactionsListener;
+import bankservice.projection.accounttransactions.TransactionsListener;
 import com.google.common.eventbus.AsyncEventBus;
 import com.google.common.eventbus.EventBus;
 import io.dropwizard.Application;
@@ -79,10 +79,10 @@ public class BankServiceApplication extends Application<Configuration> {
         // read model
         TransactionsRepository transactionsRepository = new InMemoryTransactionsRepository();
         eventBus.register(new TransactionsListener(transactionsRepository));
-        environment.jersey().register(new TransactionsResource(transactionsRepository));
+        environment.jersey().register(new AccountTransactionsResource(transactionsRepository));
 
-        AccountsSummaryRepository accountsSummaryRepository = new InMemoryAccountsSummaryRepository();
-        eventBus.register(new AccountsSummaryListener(accountsSummaryRepository));
-        environment.jersey().register(new AccountsSummaryResource(accountsSummaryRepository));
+        AccountsRepository accountsRepository = new InMemoryAccountsRepository();
+        eventBus.register(new AccountsListener(accountsRepository));
+        environment.jersey().register(new ClientAccountsResource(accountsRepository));
     }
 }

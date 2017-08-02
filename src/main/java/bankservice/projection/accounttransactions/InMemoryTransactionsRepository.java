@@ -1,4 +1,4 @@
-package bankservice.projection.transactions;
+package bankservice.projection.accounttransactions;
 
 import java.util.List;
 import java.util.Map;

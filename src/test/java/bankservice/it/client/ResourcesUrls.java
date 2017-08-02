@@ -16,6 +16,18 @@ public class ResourcesUrls {
         this.port = port;
     }
 
+    public URI clientsUrl() {
+        return fromUri("http://localhost").port(port).path("clients").build();
+    }
+
+    public URI clientUrl(String clientId) {
+        return fromUri(clientUriTemplate().createURI(clientId)).build();
+    }
+
+    public UriTemplate clientUriTemplate() {
+        return new UriTemplate(format("http://localhost:%d/clients/{id}", port));
+    }
+
     public URI accountsUrl() {
         return fromUri("http://localhost").port(port).path("accounts").build();
     }
@@ -38,25 +50,13 @@ public class ResourcesUrls {
             .path("accounts").path("{id}").path("withdrawals").build(accountId);
     }
 
-    public URI accountsSummaryUrl(String clientId) {
-        return fromUri("http://localhost").port(port).path("clients").path("{id}").path("accounts").path("summary")
+    public URI clientAccountsUrl(String clientId) {
+        return fromUri("http://localhost").port(port).path("clients").path("{id}").path("accounts")
             .build(clientId.toString());
     }
 
-    public URI transactionsUrl(String accountId) {
+    public URI accountTransactionsUrl(String accountId) {
         return fromUri("http://localhost").port(port)
             .path("accounts").path("{id}").path("transactions").build(accountId);
-    }
-
-    public URI clientsUrl() {
-        return fromUri("http://localhost").port(port).path("clients").build();
-    }
-
-    public URI clientUrl(String clientId) {
-        return fromUri(clientUriTemplate().createURI(clientId)).build();
-    }
-
-    public UriTemplate clientUriTemplate() {
-        return new UriTemplate(format("http://localhost:%d/clients/{id}", port));
     }
 }

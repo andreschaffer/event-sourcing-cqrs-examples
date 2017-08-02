@@ -13,11 +13,11 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import javax.ws.rs.core.Response;
 import org.junit.Test;
 
-public class TransactionsIT extends BaseIT {
+public class AccountTransactionsIT extends BaseIT {
 
     @Test
     public void returnEmptyTransactions() throws Exception {
-        Response response = resourcesClient.getTransactions(randomUUID().toString());
+        Response response = resourcesClient.getAccountTransactions(randomUUID().toString());
         ArrayNode transactions = response.readEntity(ArrayNode.class);
         assertThat(transactions.size(), equalTo(0));
         assertThat(response.getStatus(), equalTo(200));
@@ -30,7 +30,7 @@ public class TransactionsIT extends BaseIT {
         resourcesClient.postDeposit(accountId, resourcesDtos.depositDto(ONE)).close();
         resourcesClient.postWithdrawal(accountId, resourcesDtos.withdrawalDto(TEN)).close();
 
-        Response response = resourcesClient.getTransactions(accountId);
+        Response response = resourcesClient.getAccountTransactions(accountId);
         ArrayNode transactions = response.readEntity(ArrayNode.class);
         assertThat(transactions.size(), equalTo(3));
         verifyTransaction(transactions.get(0), "DEPOSIT", 99.0);
