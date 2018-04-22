@@ -7,7 +7,7 @@ This project aims to provide examples of how to use Event Sourcing and CQRS appl
 We assume the reader has basic knowledge of Event Sourcing and CQRS concepts.  
 If you want to brush up on the subject we suggest reading:  
 - [https://martinfowler.com/eaaDev/EventSourcing.html](https://martinfowler.com/eaaDev/EventSourcing.html)
-- [https://martinfowler.com/bliki/CQRS.html](https://martinfowler.com/eaaDev/EventSourcing.html)
+- [https://martinfowler.com/bliki/CQRS.html](https://martinfowler.com/bliki/CQRS.html)
 
 ## Domain overview
 In this minimalistic bank, a _client_ can _open_ one or more _accounts_.  
