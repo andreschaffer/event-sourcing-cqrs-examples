@@ -4,7 +4,7 @@ import static java.math.BigDecimal.ONE;
 import static java.math.BigDecimal.TEN;
 import static java.util.UUID.randomUUID;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.anyListOf;
@@ -26,17 +26,17 @@ import com.google.common.eventbus.Subscribe;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class AccountServiceTest {
+class AccountServiceTest {
 
     private EventStore eventStore;
     private EventBusCounter eventBusCounter;
     private AccountService accountService;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    void setUp() {
         eventStore = spy(new InMemoryEventStore());
         EventBus eventBus = new EventBus();
         eventBusCounter = new EventBusCounter();
@@ -45,7 +45,7 @@ public class AccountServiceTest {
     }
 
     @Test
-    public void retryOnAccountWithdrawalConflictsUpToThreeAttempts() throws Exception {
+    void retryOnAccountWithdrawalConflictsUpToThreeAttempts() {
         Account account = accountService.process(new OpenAccountCommand(randomUUID()));
         UUID id = account.getId();
         accountService.process(new DepositAccountCommand(id, TEN));

@@ -4,7 +4,7 @@ import static java.math.BigDecimal.TEN;
 import static java.math.BigDecimal.valueOf;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import java.math.BigDecimal;
@@ -12,12 +12,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import javax.ws.rs.core.Response;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class ClientAccountsIT extends BaseIT {
+class ClientAccountsIT extends BaseIT {
 
     @Test
-    public void returnClientAccounts() throws Exception {
+    void returnClientAccounts() {
         String clientId = UUID.randomUUID().toString();
         verifyClientAccounts(clientId, emptyMap());
 

@@ -1,36 +1,37 @@
 package bankservice.port.incoming.adapter.resources.accounts;
 
-import bankservice.service.account.AccountNotFoundException;
-import io.dropwizard.testing.junit.ResourceTestRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Response;
-import java.util.UUID;
-
 import static bankservice.port.incoming.adapter.resources.accounts.AccountNotFoundExceptionMapperTest.NeverFoundAccountResource.calls;
 import static java.lang.String.format;
 import static java.util.UUID.randomUUID;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
-public class AccountNotFoundExceptionMapperTest {
+import bankservice.service.account.AccountNotFoundException;
+import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
+import io.dropwizard.testing.junit5.ResourceExtension;
+import java.util.UUID;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
-    @Rule
-    public final ResourceTestRule resources = ResourceTestRule.builder()
+@ExtendWith(DropwizardExtensionsSupport.class)
+class AccountNotFoundExceptionMapperTest {
+
+    static final ResourceExtension RESOURCES = ResourceExtension.builder()
             .addProvider(AccountNotFoundExceptionMapper.class)
             .addResource(new NeverFoundAccountResource())
             .build();
 
     @Test
-    public void returnNotFound() throws Exception {
-        Response response = resources.client().target(format("/never-found-account-resource/%s", randomUUID()))
-                .request().get();
+    void returnNotFound() {
+        Response response = RESOURCES.client()
+            .target(format("/never-found-account-resource/%s", randomUUID()))
+            .request().get();
         response.close();
         assertThat(response.getStatus(), equalTo(404));
         assertThat(calls, equalTo(1));

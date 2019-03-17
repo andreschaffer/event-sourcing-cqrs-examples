@@ -3,17 +3,17 @@ package bankservice.domain.model.client;
 import static java.util.UUID.randomUUID;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import bankservice.domain.model.Event;
 import java.util.List;
 import java.util.UUID;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class ClientTest {
+class ClientTest {
 
     @Test
-    public void newClientHasBeenEnrolled() throws Exception {
+    void newClientHasBeenEnrolled() {
         UUID id = randomUUID();
         String name = "john";
         Email email = new Email("john@example.com");

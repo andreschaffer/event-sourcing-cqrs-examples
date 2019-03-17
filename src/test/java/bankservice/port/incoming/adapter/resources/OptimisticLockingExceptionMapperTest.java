@@ -1,31 +1,33 @@
 package bankservice.port.incoming.adapter.resources;
 
-import bankservice.domain.model.OptimisticLockingException;
-import io.dropwizard.testing.junit.ResourceTestRule;
-import org.junit.Rule;
-import org.junit.Test;
+import static javax.ws.rs.client.Entity.json;
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
+import bankservice.domain.model.OptimisticLockingException;
+import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
+import io.dropwizard.testing.junit5.ResourceExtension;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
-import static javax.ws.rs.client.Entity.json;
-import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
+@ExtendWith(DropwizardExtensionsSupport.class)
+class OptimisticLockingExceptionMapperTest {
 
-public class OptimisticLockingExceptionMapperTest {
-
-    @Rule
-    public final ResourceTestRule resources = ResourceTestRule.builder()
+    static final ResourceExtension RESOURCES = ResourceExtension.builder()
             .addProvider(OptimisticLockingExceptionMapper.class)
             .addResource(new ConcurrentlyModifiedResource())
             .build();
 
     @Test
-    public void returnConflict() throws Exception {
-        Response response = resources.client().target("/concurrently-modified-resource").request().put(json("{}"));
+    void returnConflict() {
+        Response response = RESOURCES.client()
+            .target("/concurrently-modified-resource")
+            .request().put(json("{}"));
         response.close();
         assertThat(response.getStatus(), equalTo(409));
     }

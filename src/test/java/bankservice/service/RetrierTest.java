@@ -1,23 +1,25 @@
 package bankservice.service;
 
-import org.junit.Test;
-
-import java.util.function.Supplier;
-
 import static java.util.Collections.singletonList;
 import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
-import static org.mockito.Mockito.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-public class RetrierTest {
+import java.util.function.Supplier;
+import org.junit.jupiter.api.Test;
+
+class RetrierTest {
 
     private RuntimeException exceptionToRetryOn =  new IllegalStateException();
     private int maxAttempts = 10;
     private Retrier retrier = new Retrier(singletonList(exceptionToRetryOn.getClass()), maxAttempts);
 
     @Test
-    public void retriesGetUpToMaxAttemptsWithoutSharedStateBetweenCalls() throws Exception {
+    void retriesGetUpToMaxAttemptsWithoutSharedStateBetweenCalls() {
         retryGetUpToMaxAttempts();
         retryGetUpToMaxAttempts();
     }

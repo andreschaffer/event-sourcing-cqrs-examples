@@ -2,18 +2,18 @@ package bankservice.it;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.junit.Test;
 
 import javax.ws.rs.core.Response;
+import org.junit.jupiter.api.Test;
 
 import static java.util.UUID.randomUUID;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.assertThat;
 
-public class ClientIT extends BaseIT {
+class ClientIT extends BaseIT {
 
     @Test
-    public void returnClient() throws Exception {
+    void returnClient() {
         String name = "Jensen", email = "jensen@example.com";
         String clientId = stateSetup.newClient(name, email);
         Response response = resourcesClient.getClient(clientId);
@@ -24,14 +24,14 @@ public class ClientIT extends BaseIT {
     }
 
     @Test
-    public void returnClientNotFound() throws Exception {
+    void returnClientNotFound() {
         Response response = resourcesClient.getClient(randomUUID().toString());
         response.close();
         assertThat(response.getStatus(), equalTo(404));
     }
 
     @Test
-    public void updateClient() throws Exception {
+    void updateClient() {
         String clientId = stateSetup.newClient("Jaya", "jaya@example.com");
         String newName = "Jayan", newEmail = "jayan@example.com";
         {

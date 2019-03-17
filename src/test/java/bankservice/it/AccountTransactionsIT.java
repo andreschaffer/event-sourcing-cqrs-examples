@@ -6,17 +6,17 @@ import static java.math.BigDecimal.valueOf;
 import static java.util.UUID.randomUUID;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import javax.ws.rs.core.Response;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class AccountTransactionsIT extends BaseIT {
+class AccountTransactionsIT extends BaseIT {
 
     @Test
-    public void returnEmptyTransactions() throws Exception {
+    void returnEmptyTransactions() {
         Response response = resourcesClient.getAccountTransactions(randomUUID().toString());
         ArrayNode transactions = response.readEntity(ArrayNode.class);
         assertThat(transactions.size(), equalTo(0));
@@ -24,7 +24,7 @@ public class AccountTransactionsIT extends BaseIT {
     }
 
     @Test
-    public void returnTransactions() throws Exception {
+    void returnTransactions() {
         String accountId = stateSetup.newAccount(randomUUID().toString());
         resourcesClient.postDeposit(accountId, resourcesDtos.depositDto(valueOf(99))).close();
         resourcesClient.postDeposit(accountId, resourcesDtos.depositDto(ONE)).close();

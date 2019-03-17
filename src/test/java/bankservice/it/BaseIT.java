@@ -7,22 +7,23 @@ import bankservice.it.client.ResourcesClient;
 import bankservice.it.client.ResourcesDtos;
 import bankservice.it.setup.StateSetup;
 import io.dropwizard.Configuration;
-import io.dropwizard.testing.junit.DropwizardAppRule;
-import org.junit.BeforeClass;
-import org.junit.ClassRule;
+import io.dropwizard.testing.junit5.DropwizardAppExtension;
+import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.extension.ExtendWith;
 
-public abstract class BaseIT {
+@ExtendWith(DropwizardExtensionsSupport.class)
+abstract class BaseIT {
 
-    @ClassRule
-    public static final DropwizardAppRule<Configuration> BANK_SERVICE =
-        new DropwizardAppRule<>(BankServiceApplication.class, resourceFilePath("integration.yml"));
+    protected static final DropwizardAppExtension<Configuration> BANK_SERVICE =
+        new DropwizardAppExtension<>(BankServiceApplication.class, resourceFilePath("integration.yml"));
 
     protected static ResourcesClient resourcesClient;
     protected static ResourcesDtos resourcesDtos;
     protected static StateSetup stateSetup;
 
-    @BeforeClass
-    public static void setUpBaseClass() throws Exception {
+    @BeforeAll
+    public static void setUpBaseClass() {
         resourcesClient = new ResourcesClient(BANK_SERVICE.getEnvironment(), BANK_SERVICE.getLocalPort());
         resourcesDtos = new ResourcesDtos(BANK_SERVICE.getObjectMapper());
         stateSetup = new StateSetup(resourcesClient, resourcesDtos);

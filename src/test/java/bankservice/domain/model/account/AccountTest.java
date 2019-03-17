@@ -5,18 +5,19 @@ import static java.math.BigDecimal.ZERO;
 import static java.util.UUID.randomUUID;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import bankservice.domain.model.Event;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class AccountTest {
+class AccountTest {
 
     @Test
-    public void newAccountHasNewAccountOpenedEvent() throws Exception {
+    void newAccountHasNewAccountOpenedEvent() {
         UUID id = randomUUID();
         UUID clientId = randomUUID();
         Account account = new Account(id, clientId);
@@ -36,7 +37,7 @@ public class AccountTest {
     }
 
     @Test
-    public void depositedAccountHasAccountDepositedEvent() throws Exception {
+    void depositedAccountHasAccountDepositedEvent() {
         Account account = new Account(randomUUID(), randomUUID());
         BigDecimal amount = BigDecimal.valueOf(100.50);
 
@@ -52,7 +53,7 @@ public class AccountTest {
     }
 
     @Test
-    public void withdrawnAccountHasAccountWithdrawnEvent() throws Exception {
+    void withdrawnAccountHasAccountWithdrawnEvent() {
         Account account = new Account(randomUUID(), randomUUID());
         account.deposit(BigDecimal.valueOf(30));
 
@@ -67,9 +68,11 @@ public class AccountTest {
         assertThat(account.getBalance(), equalTo(TEN));
     }
 
-    @Test(expected = NonSufficientFundsException.class)
-    public void failsWithdrawalWithNonSufficientFunds() throws Exception {
+    @Test
+    void failsWithdrawalWithNonSufficientFunds() {
         Account account = new Account(randomUUID(), randomUUID());
-        account.withdraw(BigDecimal.valueOf(1));
+        assertThrows(
+            NonSufficientFundsException.class,
+            () -> account.withdraw(BigDecimal.valueOf(1)));
     }
 }
