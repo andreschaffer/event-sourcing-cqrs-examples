@@ -1,6 +1,6 @@
 language: java
 jdk:
-  - oraclejdk8
+  - oraclejdk11
 script: mvn clean verify -Pcode-coverage
 cache:
   directories:

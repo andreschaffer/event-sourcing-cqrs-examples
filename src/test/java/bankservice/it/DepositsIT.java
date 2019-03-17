@@ -3,18 +3,18 @@ package bankservice.it;
 import static java.math.BigDecimal.TEN;
 import static java.util.UUID.randomUUID;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.math.BigDecimal;
 import javax.ws.rs.core.Response;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class DepositsIT extends BaseIT {
+class DepositsIT extends BaseIT {
 
     @Test
-    public void returnAccountNotFound() throws Exception {
+    void returnAccountNotFound() {
         ObjectNode deposit = resourcesDtos.depositDto(TEN);
         Response response = resourcesClient.postDeposit(randomUUID().toString(), deposit);
         response.close();
@@ -22,7 +22,7 @@ public class DepositsIT extends BaseIT {
     }
 
     @Test
-    public void depositAccount() throws Exception {
+    void depositAccount() {
         String accountId = stateSetup.newAccount(randomUUID().toString());
         BigDecimal amount = TEN;
         {

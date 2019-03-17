@@ -4,18 +4,18 @@ import static java.math.BigDecimal.ONE;
 import static java.math.BigDecimal.TEN;
 import static java.math.BigDecimal.ZERO;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.UUID;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class InMemoryAccountsRepositoryTest {
+class InMemoryAccountsRepositoryTest {
 
     private AccountsRepository accountsRepository =
             new InMemoryAccountsRepository();
 
     @Test
-    public void ignoreEventOutOfOrder() throws Exception {
+    void ignoreEventOutOfOrder() {
         UUID clientId = UUID.randomUUID();
         UUID accountId = UUID.randomUUID();
         accountsRepository.save(new AccountProjection(accountId, clientId, ZERO, 1));

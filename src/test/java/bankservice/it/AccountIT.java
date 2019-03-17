@@ -2,17 +2,17 @@ package bankservice.it;
 
 import static java.util.UUID.randomUUID;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import java.util.UUID;
 import javax.ws.rs.core.Response;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class AccountIT extends BaseIT {
+class AccountIT extends BaseIT {
 
     @Test
-    public void returnAccount() throws Exception {
+    void returnAccount() {
         String clientId = UUID.randomUUID().toString();
         String accountId = stateSetup.newAccount(clientId);
         Response response = resourcesClient.getAccount(accountId);
@@ -24,7 +24,7 @@ public class AccountIT extends BaseIT {
     }
 
     @Test
-    public void returnAccountNotFound() throws Exception {
+    void returnAccountNotFound() {
         Response response = resourcesClient.getAccount(randomUUID().toString());
         response.close();
         assertThat(response.getStatus(), equalTo(404));
