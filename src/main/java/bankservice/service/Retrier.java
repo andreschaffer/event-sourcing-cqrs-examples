@@ -8,13 +8,13 @@ import static org.apache.commons.collections.CollectionUtils.isNotEmpty;
 
 public class Retrier {
 
-    private final List<Class<? extends Exception>> exceptions;
+    private final List<Class<? extends Exception>> retriableExceptions;
     private final int maxAttempts;
 
-    public Retrier(List<Class<? extends Exception>> exceptions, int maxAttempts) {
-        checkArgument(isNotEmpty(exceptions));
+    public Retrier(List<Class<? extends Exception>> retriableExceptions, int maxAttempts) {
+        checkArgument(isNotEmpty(retriableExceptions));
         checkArgument(maxAttempts > 1);
-        this.exceptions = exceptions;
+        this.retriableExceptions = retriableExceptions;
         this.maxAttempts = maxAttempts;
     }
 
@@ -23,12 +23,12 @@ public class Retrier {
             try {
                 return supplier.get();
             } catch (Exception exception) {
-                if (exceptions.stream().anyMatch(e -> e.isAssignableFrom(exception.getClass()))
-                        && attempt < maxAttempts) {
-                    continue;
-                }
-                throw exception;
+                if (!isRetriable(exception) || attempt == maxAttempts) throw exception;
             }
         }
+    }
+
+    private boolean isRetriable(Exception exception) {
+        return retriableExceptions.stream().anyMatch(e -> e.isAssignableFrom(exception.getClass()));
     }
 }
