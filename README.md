@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/andreschaffer/event-sourcing-cqrs-examples.svg?branch=master)](https://travis-ci.org/andreschaffer/event-sourcing-cqrs-examples)
 [![Coverage Status](https://coveralls.io/repos/github/andreschaffer/event-sourcing-cqrs-examples/badge.svg?branch=master)](https://coveralls.io/github/andreschaffer/event-sourcing-cqrs-examples?branch=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/299df5b2515003778612/maintainability)](https://codeclimate.com/github/andreschaffer/event-sourcing-cqrs-examples/maintainability)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=andreschaffer/event-sourcing-cqrs-examples)](https://dependabot.com)
 
 # Event Sourcing and CQRS Examples
 This project aims to provide examples of how to use Event Sourcing and CQRS applied to a minimalistic bank context.  
