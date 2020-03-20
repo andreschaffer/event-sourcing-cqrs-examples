@@ -15,7 +15,7 @@ public abstract class Event {
     public Event(UUID aggregateId, DateTime timestamp, int version) {
         this.aggregateId = checkNotNull(aggregateId);
         this.timestamp = checkNotNull(timestamp);
-        this.version = checkNotNull(version);
+        this.version = version;
     }
 
     public UUID getAggregateId() {

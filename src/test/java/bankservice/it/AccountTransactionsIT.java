@@ -13,6 +13,8 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import javax.ws.rs.core.Response;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 class AccountTransactionsIT extends BaseIT {
 
     @Test
@@ -26,7 +28,7 @@ class AccountTransactionsIT extends BaseIT {
     @Test
     void returnTransactions() {
         String accountId = stateSetup.newAccount(randomUUID().toString());
-        resourcesClient.postDeposit(accountId, resourcesDtos.depositDto(valueOf(99))).close();
+        resourcesClient.postDeposit(accountId, resourcesDtos.depositDto(BigDecimal.valueOf(99))).close();
         resourcesClient.postDeposit(accountId, resourcesDtos.depositDto(ONE)).close();
         resourcesClient.postWithdrawal(accountId, resourcesDtos.withdrawalDto(TEN)).close();
 

@@ -18,6 +18,7 @@ class EmailSpecificationTest {
         assertThat(specification.isSatisfiedBy(value), equalTo(isValid));
     }
 
+    @SuppressWarnings("unused")
     private static Stream<Arguments> emails() {
         return Stream.of(
             Arguments.of("email@example.com", true),

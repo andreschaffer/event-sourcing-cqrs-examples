@@ -37,7 +37,7 @@ public abstract class Aggregate {
 
     protected void applyNewEvent(Event event) {
         checkArgument(event.getVersion() == getNextVersion(),
-                "New event version '%d' does not match expected next version '%d'",
+                "New event version '%s' does not match expected next version '%s'",
                 event.getVersion(), getNextVersion());
         apply(event);
         newEvents.add(event);
