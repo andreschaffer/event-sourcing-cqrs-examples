@@ -1,14 +1,17 @@
 package bankservice.projection.clientaccounts;
 
-import static java.util.Collections.emptyMap;
-
 import com.google.common.collect.ImmutableList;
+
 import java.math.BigDecimal;
-import java.util.HashMap;
+import java.util.AbstractMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.util.Collections.emptyMap;
 
 public class InMemoryAccountsRepository implements AccountsRepository {
 
@@ -44,8 +47,8 @@ public class InMemoryAccountsRepository implements AccountsRepository {
     }
 
     private Map<UUID, AccountProjection> newAccountsMap(AccountProjection accountProjection) {
-        return new HashMap<UUID, AccountProjection>() {
-            { put(accountProjection.getAccountId(), accountProjection); }
-        };
+        return Stream.of(
+                new AbstractMap.SimpleEntry<>(accountProjection.getAccountId(), accountProjection))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 }

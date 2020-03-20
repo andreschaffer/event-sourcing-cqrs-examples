@@ -1,16 +1,17 @@
 package bankservice.it;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.junit.jupiter.api.Test;
+
+import javax.ws.rs.core.Response;
+import java.math.BigDecimal;
+
 import static java.math.BigDecimal.TEN;
 import static java.math.BigDecimal.valueOf;
 import static java.util.UUID.randomUUID;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import java.math.BigDecimal;
-import javax.ws.rs.core.Response;
-import org.junit.jupiter.api.Test;
 
 class WithdrawalsIT extends BaseIT {
 
@@ -24,9 +25,9 @@ class WithdrawalsIT extends BaseIT {
 
     @Test
     void withdrawAccount() {
-        BigDecimal previousBalance = valueOf(9.99);
-        BigDecimal withdrawalAmount = valueOf(5.55);
-        BigDecimal expectedBalance = valueOf(4.44);
+        BigDecimal previousBalance = BigDecimal.valueOf(9.99);
+        BigDecimal withdrawalAmount = BigDecimal.valueOf(5.55);
+        BigDecimal expectedBalance = BigDecimal.valueOf(4.44);
         String accountId = stateSetup.newAccountWithBalance(randomUUID().toString(), previousBalance);
         {
             ObjectNode withdrawal = resourcesDtos.withdrawalDto(withdrawalAmount);
@@ -45,7 +46,7 @@ class WithdrawalsIT extends BaseIT {
     @Test
     void returnBadRequestForNonSufficientFunds() {
         String accountId = stateSetup.newAccount(randomUUID().toString());
-        ObjectNode withdrawal = resourcesDtos.withdrawalDto(valueOf(1000));
+        ObjectNode withdrawal = resourcesDtos.withdrawalDto(BigDecimal.valueOf(1000));
         Response response = resourcesClient.postWithdrawal(accountId, withdrawal);
         response.close();
         assertThat(response.getStatus(), equalTo(400));
