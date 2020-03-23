@@ -2,8 +2,8 @@ package bankservice.port.incoming.adapter.resources;
 
 import static javax.ws.rs.client.Entity.json;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 import bankservice.domain.model.OptimisticLockingException;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;

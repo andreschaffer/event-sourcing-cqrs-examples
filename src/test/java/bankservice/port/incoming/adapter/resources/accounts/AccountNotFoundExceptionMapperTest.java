@@ -4,8 +4,8 @@ import static bankservice.port.incoming.adapter.resources.accounts.AccountNotFou
 import static java.lang.String.format;
 import static java.util.UUID.randomUUID;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 import bankservice.service.account.AccountNotFoundException;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;

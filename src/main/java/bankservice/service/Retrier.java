@@ -1,7 +1,6 @@
 package bankservice.service;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static org.apache.commons.collections.CollectionUtils.isNotEmpty;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -12,7 +11,7 @@ public class Retrier {
   private final int maxAttempts;
 
   public Retrier(List<Class<? extends Exception>> retriableExceptions, int maxAttempts) {
-    checkArgument(isNotEmpty(retriableExceptions));
+    checkArgument(!retriableExceptions.isEmpty());
     checkArgument(maxAttempts > 1);
     this.retriableExceptions = retriableExceptions;
     this.maxAttempts = maxAttempts;

@@ -1,7 +1,7 @@
 package bankservice.domain.model.client;
 
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;

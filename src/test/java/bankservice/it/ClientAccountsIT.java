@@ -2,8 +2,8 @@ package bankservice.it;
 
 import static java.math.BigDecimal.TEN;
 import static java.util.Collections.emptyMap;
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import java.math.BigDecimal;
