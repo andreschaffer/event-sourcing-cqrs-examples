@@ -2,16 +2,16 @@ package bankservice.domain.model;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.time.ZonedDateTime;
 import java.util.UUID;
-import org.joda.time.DateTime;
 
 public abstract class Event {
 
   private final UUID aggregateId;
-  private final DateTime timestamp;
+  private final ZonedDateTime timestamp;
   private final int version;
 
-  public Event(UUID aggregateId, DateTime timestamp, int version) {
+  public Event(UUID aggregateId, ZonedDateTime timestamp, int version) {
     this.aggregateId = checkNotNull(aggregateId);
     this.timestamp = checkNotNull(timestamp);
     this.version = version;
@@ -21,7 +21,7 @@ public abstract class Event {
     return aggregateId;
   }
 
-  public DateTime getTimestamp() {
+  public ZonedDateTime getTimestamp() {
     return this.timestamp;
   }
 

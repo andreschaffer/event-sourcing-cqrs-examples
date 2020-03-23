@@ -2,9 +2,9 @@ package bankservice.domain.model.client;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static java.time.ZoneOffset.UTC;
+import static java.time.ZonedDateTime.now;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.joda.time.DateTime.now;
-import static org.joda.time.DateTimeZone.UTC;
 
 import bankservice.domain.model.Aggregate;
 import bankservice.domain.model.Event;

@@ -200,8 +200,6 @@
             <ignoredUsedUndeclaredDependency>
               org.glassfish.jersey.core:*
             </ignoredUsedUndeclaredDependency>
-            <!-- TODO move from joda to java time -->
-            <ignoredUsedUndeclaredDependency>joda-time:joda-time:*</ignoredUsedUndeclaredDependency>
           </ignoredUsedUndeclaredDependencies>
         </configuration>
         <executions>

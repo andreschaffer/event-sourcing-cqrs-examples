@@ -1,16 +1,16 @@
 package bankservice.domain.model;
 
+import static java.time.ZoneOffset.UTC;
+import static java.time.ZonedDateTime.now;
 import static java.util.Collections.singletonList;
 import static java.util.UUID.randomUUID;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.joda.time.DateTime.now;
-import static org.joda.time.DateTimeZone.UTC;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
-import org.joda.time.DateTime;
 import org.junit.jupiter.api.Test;
 
 class AggregateTest {
@@ -129,7 +129,7 @@ class AggregateTest {
 
     private int calledBackTimes = 0;
 
-    private DummyEvent(UUID aggregateId, DateTime timestamp, int version) {
+    private DummyEvent(UUID aggregateId, ZonedDateTime timestamp, int version) {
       super(aggregateId, timestamp, version);
     }
 
@@ -146,7 +146,7 @@ class AggregateTest {
 
     private RuntimeException exception;
 
-    private ProblematicEvent(UUID aggregateId, DateTime timestamp, int version,
+    private ProblematicEvent(UUID aggregateId, ZonedDateTime timestamp, int version,
         RuntimeException exception) {
       super(aggregateId, timestamp, version);
       this.exception = exception;

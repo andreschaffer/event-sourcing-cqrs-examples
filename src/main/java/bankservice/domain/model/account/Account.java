@@ -1,8 +1,8 @@
 package bankservice.domain.model.account;
 
 import static java.math.BigDecimal.ZERO;
-import static org.joda.time.DateTime.now;
-import static org.joda.time.DateTimeZone.UTC;
+import static java.time.ZoneOffset.UTC;
+import static java.time.ZonedDateTime.now;
 
 import bankservice.domain.model.Aggregate;
 import bankservice.domain.model.Event;

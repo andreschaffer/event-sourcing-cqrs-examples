@@ -3,15 +3,15 @@ package bankservice.domain.model.client;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import bankservice.domain.model.Event;
+import java.time.ZonedDateTime;
 import java.util.UUID;
-import org.joda.time.DateTime;
 
 public class ClientUpdatedEvent extends Event {
 
   private final String name;
   private final String email;
 
-  public ClientUpdatedEvent(UUID aggregateId, DateTime timestamp, int version, String name,
+  public ClientUpdatedEvent(UUID aggregateId, ZonedDateTime timestamp, int version, String name,
       Email email) {
     super(aggregateId, timestamp, version);
     this.name = checkNotNull(name);

@@ -3,19 +3,19 @@ package bankservice.projection.accounttransactions;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 import java.util.UUID;
-import org.joda.time.DateTime;
 
 public class TransactionProjection {
 
   private final UUID accountId;
   private final TransactionType type;
   private final BigDecimal amount;
-  private final DateTime timestamp;
+  private final ZonedDateTime timestamp;
   private final int version;
 
   public TransactionProjection(UUID accountId, TransactionType type, BigDecimal amount,
-      DateTime timestamp, int version) {
+      ZonedDateTime timestamp, int version) {
     this.accountId = checkNotNull(accountId);
     this.type = checkNotNull(type);
     this.amount = checkNotNull(amount).setScale(2, BigDecimal.ROUND_HALF_UP);
@@ -35,7 +35,7 @@ public class TransactionProjection {
     return amount;
   }
 
-  public DateTime getTimestamp() {
+  public ZonedDateTime getTimestamp() {
     return timestamp;
   }
 

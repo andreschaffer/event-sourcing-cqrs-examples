@@ -4,15 +4,15 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import bankservice.domain.model.Event;
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 import java.util.UUID;
-import org.joda.time.DateTime;
 
 public class AccountDepositedEvent extends Event {
 
   private final BigDecimal amount;
   private final BigDecimal balance;
 
-  public AccountDepositedEvent(UUID aggregateId, DateTime timestamp, int version,
+  public AccountDepositedEvent(UUID aggregateId, ZonedDateTime timestamp, int version,
       BigDecimal amount, BigDecimal balance) {
     super(aggregateId, timestamp, version);
     this.amount = checkNotNull(amount);

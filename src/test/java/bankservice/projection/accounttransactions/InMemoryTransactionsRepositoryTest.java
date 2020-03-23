@@ -3,11 +3,11 @@ package bankservice.projection.accounttransactions;
 import static bankservice.projection.accounttransactions.TransactionProjection.TransactionType.DEPOSIT;
 import static java.math.BigDecimal.ONE;
 import static java.math.BigDecimal.TEN;
+import static java.time.ZoneOffset.UTC;
+import static java.time.ZonedDateTime.now;
 import static java.util.UUID.randomUUID;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.joda.time.DateTime.now;
-import static org.joda.time.DateTimeZone.UTC;
 
 import java.util.List;
 import java.util.UUID;
