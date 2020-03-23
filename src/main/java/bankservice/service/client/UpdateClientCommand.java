@@ -1,33 +1,32 @@
 package bankservice.service.client;
 
 
-import bankservice.domain.model.client.Email;
-
-import java.util.UUID;
-
 import static com.google.common.base.Preconditions.checkNotNull;
+
+import bankservice.domain.model.client.Email;
+import java.util.UUID;
 
 public class UpdateClientCommand {
 
-    private final UUID id;
-    private final String name;
-    private final Email email;
+  private final UUID id;
+  private final String name;
+  private final Email email;
 
-    public UpdateClientCommand(UUID id, String name, Email email) {
-        this.id = checkNotNull(id);
-        this.name = checkNotNull(name);
-        this.email = checkNotNull(email);
-    }
+  public UpdateClientCommand(UUID id, String name, Email email) {
+    this.id = checkNotNull(id);
+    this.name = checkNotNull(name);
+    this.email = checkNotNull(email);
+  }
 
-    public UUID getId() {
-        return id;
-    }
+  public UUID getId() {
+    return id;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public Email getEmail() {
-        return email;
-    }
+  public Email getEmail() {
+    return email;
+  }
 }

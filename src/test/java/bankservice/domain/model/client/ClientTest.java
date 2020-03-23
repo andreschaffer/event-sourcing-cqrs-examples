@@ -12,24 +12,24 @@ import org.junit.jupiter.api.Test;
 
 class ClientTest {
 
-    @Test
-    void newClientHasBeenEnrolled() {
-        UUID id = randomUUID();
-        String name = "john";
-        Email email = new Email("john@example.com");
+  @Test
+  void newClientHasBeenEnrolled() {
+    UUID id = randomUUID();
+    String name = "john";
+    Email email = new Email("john@example.com");
 
-        Client client = new Client(id, name, email);
+    Client client = new Client(id, name, email);
 
-        List<Event> newEvents = client.getNewEvents();
-        assertThat(newEvents.size(), equalTo(1));
-        assertThat(newEvents.get(0), instanceOf(ClientEnrolledEvent.class));
-        ClientEnrolledEvent event = (ClientEnrolledEvent) newEvents.get(0);
-        assertThat(event.getAggregateId(), equalTo(id));
-        assertThat(event.getName(), equalTo(name));
-        assertThat(event.getEmail(), equalTo(email));
+    List<Event> newEvents = client.getNewEvents();
+    assertThat(newEvents.size(), equalTo(1));
+    assertThat(newEvents.get(0), instanceOf(ClientEnrolledEvent.class));
+    ClientEnrolledEvent event = (ClientEnrolledEvent) newEvents.get(0);
+    assertThat(event.getAggregateId(), equalTo(id));
+    assertThat(event.getName(), equalTo(name));
+    assertThat(event.getEmail(), equalTo(email));
 
-        assertThat(client.getId(), equalTo(id));
-        assertThat(client.getName(), equalTo(name));
-        assertThat(client.getEmail(), equalTo(email));
-    }
+    assertThat(client.getId(), equalTo(id));
+    assertThat(client.getName(), equalTo(name));
+    assertThat(client.getEmail(), equalTo(email));
+  }
 }

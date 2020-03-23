@@ -31,48 +31,51 @@ import org.junit.jupiter.api.Test;
 
 class AccountServiceTest {
 
-    private EventStore eventStore;
-    private EventBusCounter eventBusCounter;
-    private AccountService accountService;
+  private EventStore eventStore;
+  private EventBusCounter eventBusCounter;
+  private AccountService accountService;
 
-    @BeforeEach
-    void setUp() {
-        eventStore = spy(new InMemoryEventStore());
-        EventBus eventBus = new EventBus();
-        eventBusCounter = new EventBusCounter();
-        eventBus.register(eventBusCounter);
-        accountService = new AccountService(eventStore, eventBus);
+  @BeforeEach
+  void setUp() {
+    eventStore = spy(new InMemoryEventStore());
+    EventBus eventBus = new EventBus();
+    eventBusCounter = new EventBusCounter();
+    eventBus.register(eventBusCounter);
+    accountService = new AccountService(eventStore, eventBus);
+  }
+
+  @Test
+  void retryOnAccountWithdrawalConflictsUpToThreeAttempts() {
+    Account account = accountService.process(new OpenAccountCommand(randomUUID()));
+    UUID id = account.getId();
+    accountService.process(new DepositAccountCommand(id, TEN));
+    doThrow(OptimisticLockingException.class)
+        .doThrow(OptimisticLockingException.class)
+        .doCallRealMethod()
+        .when(eventStore).store(eq(id), anyListOf(Event.class), anyInt());
+
+    accountService.process(new WithdrawAccountCommand(id, ONE));
+    int creationAttempts = 1;
+    int depositAttempts = 1;
+    int withdrawalAttempts = 3;
+    int loadTimes = depositAttempts + withdrawalAttempts;
+    int storeTimes = creationAttempts + depositAttempts + withdrawalAttempts;
+    verify(eventStore, times(loadTimes)).load(eq(id));
+    verify(eventStore, times(storeTimes)).store(eq(id), anyListOf(Event.class), anyInt());
+    assertThat(eventBusCounter.eventsCount.get(AccountOpenedEvent.class), equalTo(1));
+    assertThat(eventBusCounter.eventsCount.get(AccountDepositedEvent.class), equalTo(1));
+    assertThat(eventBusCounter.eventsCount.get(AccountWithdrawnEvent.class), equalTo(1));
+    assertThat(eventBusCounter.eventsCount.size(), equalTo(3));
+  }
+
+  private static class EventBusCounter {
+
+    Map<Class<?>, Integer> eventsCount = new ConcurrentHashMap<>();
+
+    @Subscribe
+    @SuppressWarnings("unused")
+    public void handle(Object event) {
+      eventsCount.merge(event.getClass(), 1, Integer::sum);
     }
-
-    @Test
-    void retryOnAccountWithdrawalConflictsUpToThreeAttempts() {
-        Account account = accountService.process(new OpenAccountCommand(randomUUID()));
-        UUID id = account.getId();
-        accountService.process(new DepositAccountCommand(id, TEN));
-        doThrow(OptimisticLockingException.class)
-                .doThrow(OptimisticLockingException.class)
-                .doCallRealMethod()
-                .when(eventStore).store(eq(id), anyListOf(Event.class), anyInt());
-
-        accountService.process(new WithdrawAccountCommand(id, ONE));
-        int creationAttempts = 1, depositAttempts = 1, withdrawalAttempts = 3;
-        int loadTimes = depositAttempts + withdrawalAttempts;
-        int storeTimes = creationAttempts + depositAttempts + withdrawalAttempts;
-        verify(eventStore, times(loadTimes)).load(eq(id));
-        verify(eventStore, times(storeTimes)).store(eq(id), anyListOf(Event.class), anyInt());
-        assertThat(eventBusCounter.eventsCount.get(AccountOpenedEvent.class), equalTo(1));
-        assertThat(eventBusCounter.eventsCount.get(AccountDepositedEvent.class), equalTo(1));
-        assertThat(eventBusCounter.eventsCount.get(AccountWithdrawnEvent.class), equalTo(1));
-        assertThat(eventBusCounter.eventsCount.size(), equalTo(3));
-    }
-
-    private static class EventBusCounter {
-        Map<Class<?>, Integer> eventsCount = new ConcurrentHashMap<>();
-
-        @Subscribe
-        @SuppressWarnings("unused")
-        public void handle(Object event) {
-            eventsCount.merge(event.getClass(), 1, (oldValue, value) -> oldValue + value);
-        }
-    }
+  }
 }

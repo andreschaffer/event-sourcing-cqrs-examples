@@ -5,7 +5,9 @@ import java.util.UUID;
 
 public interface EventStore {
 
-    void store(UUID aggregateId, List<Event> newEvents, int baseVersion) throws OptimisticLockingException;
-    List<Event> load(UUID aggregateId);
+  void store(UUID aggregateId, List<Event> newEvents, int baseVersion)
+      throws OptimisticLockingException;
+
+  List<Event> load(UUID aggregateId);
 
 }

@@ -11,13 +11,13 @@ import org.junit.jupiter.api.Test;
 
 class AccountsIT extends BaseIT {
 
-    @Test
-    void newAccount() {
-        String clientId = stateSetup.newClient("John", "john@example.com");
-        Response response = resourcesClient.postAccount(resourcesDtos.accountDto(clientId));
-        response.close();
-        assertThat(response.getStatus(), equalTo(201));
-        UriTemplate accountUriTemplate = resourcesClient.getResourcesUrls().accountUriTemplate();
-        assertTrue(accountUriTemplate.match(response.getHeaderString("Location"), new ArrayList<>()));
-    }
+  @Test
+  void newAccount() {
+    String clientId = stateSetup.newClient("John", "john@example.com");
+    Response response = resourcesClient.postAccount(resourcesDtos.accountDto(clientId));
+    response.close();
+    assertThat(response.getStatus(), equalTo(201));
+    UriTemplate accountUriTemplate = resourcesClient.getResourcesUrls().accountUriTemplate();
+    assertTrue(accountUriTemplate.match(response.getHeaderString("Location"), new ArrayList<>()));
+  }
 }

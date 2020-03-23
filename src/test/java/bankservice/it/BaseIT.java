@@ -15,17 +15,19 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @ExtendWith(DropwizardExtensionsSupport.class)
 abstract class BaseIT {
 
-    protected static final DropwizardAppExtension<Configuration> BANK_SERVICE =
-        new DropwizardAppExtension<>(BankServiceApplication.class, resourceFilePath("integration.yml"));
+  protected static final DropwizardAppExtension<Configuration> BANK_SERVICE =
+      new DropwizardAppExtension<>(BankServiceApplication.class,
+          resourceFilePath("integration.yml"));
 
-    protected static ResourcesClient resourcesClient;
-    protected static ResourcesDtos resourcesDtos;
-    protected static StateSetup stateSetup;
+  protected static ResourcesClient resourcesClient;
+  protected static ResourcesDtos resourcesDtos;
+  protected static StateSetup stateSetup;
 
-    @BeforeAll
-    public static void setUpBaseClass() {
-        resourcesClient = new ResourcesClient(BANK_SERVICE.getEnvironment(), BANK_SERVICE.getLocalPort());
-        resourcesDtos = new ResourcesDtos(BANK_SERVICE.getObjectMapper());
-        stateSetup = new StateSetup(resourcesClient, resourcesDtos);
-    }
+  @BeforeAll
+  public static void setUpBaseClass() {
+    resourcesClient = new ResourcesClient(BANK_SERVICE.getEnvironment(),
+        BANK_SERVICE.getLocalPort());
+    resourcesDtos = new ResourcesDtos(BANK_SERVICE.getObjectMapper());
+    stateSetup = new StateSetup(resourcesClient, resourcesDtos);
+  }
 }

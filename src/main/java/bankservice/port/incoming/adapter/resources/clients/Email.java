@@ -18,23 +18,24 @@ import javax.validation.constraints.NotNull;
 @Constraint(validatedBy = Email.EmailValidator.class)
 public @interface Email {
 
-    String message() default "not a well-formed email address";
+  String message() default "not a well-formed email address";
 
-    Class<?>[] groups() default {};
+  Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default {};
+  Class<? extends Payload>[] payload() default {};
 
 
-    class EmailValidator implements ConstraintValidator<Email, String> {
+  class EmailValidator implements ConstraintValidator<Email, String> {
 
-        private EmailSpecification emailSpecification = new EmailSpecification();
+    private EmailSpecification emailSpecification = new EmailSpecification();
 
-        @Override
-        public void initialize(Email constraintAnnotation) {}
-
-        @Override
-        public boolean isValid(String value, ConstraintValidatorContext context) {
-            return emailSpecification.isSatisfiedBy(value);
-        }
+    @Override
+    public void initialize(Email constraintAnnotation) {
     }
+
+    @Override
+    public boolean isValid(String value, ConstraintValidatorContext context) {
+      return emailSpecification.isSatisfiedBy(value);
+    }
+  }
 }

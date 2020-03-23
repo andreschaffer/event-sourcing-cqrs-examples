@@ -17,15 +17,15 @@ import javax.ws.rs.core.Response;
 @Path("clients/{id}/accounts")
 public class ClientAccountsResource {
 
-    private final AccountsRepository accountsRepository;
+  private final AccountsRepository accountsRepository;
 
-    public ClientAccountsResource(AccountsRepository accountsRepository) {
-        this.accountsRepository = checkNotNull(accountsRepository);
-    }
+  public ClientAccountsResource(AccountsRepository accountsRepository) {
+    this.accountsRepository = checkNotNull(accountsRepository);
+  }
 
-    @GET
-    public Response get(@PathParam("id") UUIDParam clientId) {
-        List<AccountProjection> accounts = accountsRepository.getAccounts(clientId.get());
-        return Response.ok(accounts).build();
-    }
+  @GET
+  public Response get(@PathParam("id") UUIDParam clientId) {
+    List<AccountProjection> accounts = accountsRepository.getAccounts(clientId.get());
+    return Response.ok(accounts).build();
+  }
 }

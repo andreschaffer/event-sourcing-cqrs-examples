@@ -6,9 +6,9 @@ import java.util.UUID;
 
 public interface AccountsRepository {
 
-    void save(AccountProjection accountProjection);
+  void save(AccountProjection accountProjection);
 
-    void updateBalance(UUID accountId, BigDecimal balance, int version);
+  void updateBalance(UUID accountId, BigDecimal balance, int version);
 
-    List<AccountProjection> getAccounts(UUID clientId);
+  List<AccountProjection> getAccounts(UUID clientId);
 }

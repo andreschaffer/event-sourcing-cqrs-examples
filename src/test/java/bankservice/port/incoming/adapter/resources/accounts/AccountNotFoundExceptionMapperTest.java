@@ -22,30 +22,31 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @ExtendWith(DropwizardExtensionsSupport.class)
 class AccountNotFoundExceptionMapperTest {
 
-    static final ResourceExtension RESOURCES = ResourceExtension.builder()
-            .addProvider(AccountNotFoundExceptionMapper.class)
-            .addResource(new NeverFoundAccountResource())
-            .build();
+  static final ResourceExtension RESOURCES = ResourceExtension.builder()
+      .addProvider(AccountNotFoundExceptionMapper.class)
+      .addResource(new NeverFoundAccountResource())
+      .build();
 
-    @Test
-    void returnNotFound() {
-        Response response = RESOURCES.client()
-            .target(format("/never-found-account-resource/%s", randomUUID()))
-            .request().get();
-        response.close();
-        assertThat(response.getStatus(), equalTo(404));
-        assertThat(calls, equalTo(1));
+  @Test
+  void returnNotFound() {
+    Response response = RESOURCES.client()
+        .target(format("/never-found-account-resource/%s", randomUUID()))
+        .request().get();
+    response.close();
+    assertThat(response.getStatus(), equalTo(404));
+    assertThat(calls, equalTo(1));
+  }
+
+  @Produces(APPLICATION_JSON)
+  @Path("/never-found-account-resource/{id}")
+  public static class NeverFoundAccountResource {
+
+    static int calls = 0;
+
+    @GET
+    public Response get(@PathParam("id") String id) throws AccountNotFoundException {
+      calls++;
+      throw new AccountNotFoundException(UUID.fromString(id));
     }
-
-    @Produces(APPLICATION_JSON)
-    @Path("/never-found-account-resource/{id}")
-    public static class NeverFoundAccountResource {
-        static int calls = 0;
-
-        @GET
-        public Response get(@PathParam("id") String id) throws AccountNotFoundException {
-            calls++;
-            throw new AccountNotFoundException(UUID.fromString(id));
-        }
-    }
+  }
 }

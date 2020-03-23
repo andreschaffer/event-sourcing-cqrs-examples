@@ -5,8 +5,8 @@ import java.util.UUID;
 
 public interface TransactionsRepository {
 
-    void save(TransactionProjection transactionProjection);
+  void save(TransactionProjection transactionProjection);
 
-    List<TransactionProjection> listByAccount(UUID accountId);
+  List<TransactionProjection> listByAccount(UUID accountId);
 
 }

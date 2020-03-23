@@ -10,25 +10,27 @@ import com.google.common.eventbus.Subscribe;
 
 public class TransactionsListener {
 
-    private TransactionsRepository transactionsRepository;
+  private TransactionsRepository transactionsRepository;
 
-    public TransactionsListener(TransactionsRepository transactionsRepository) {
-        this.transactionsRepository = checkNotNull(transactionsRepository);
-    }
+  public TransactionsListener(TransactionsRepository transactionsRepository) {
+    this.transactionsRepository = checkNotNull(transactionsRepository);
+  }
 
-    @Subscribe
-    @SuppressWarnings("unused")
-    public void handle(AccountDepositedEvent event) {
-        TransactionProjection tx = new TransactionProjection(
-                event.getAggregateId(), DEPOSIT, event.getAmount(), event.getTimestamp(), event.getVersion());
-        transactionsRepository.save(tx);
-    }
+  @Subscribe
+  @SuppressWarnings("unused")
+  public void handle(AccountDepositedEvent event) {
+    TransactionProjection tx = new TransactionProjection(
+        event.getAggregateId(), DEPOSIT, event.getAmount(), event.getTimestamp(),
+        event.getVersion());
+    transactionsRepository.save(tx);
+  }
 
-    @Subscribe
-    @SuppressWarnings("unused")
-    public void handle(AccountWithdrawnEvent event) {
-        TransactionProjection tx = new TransactionProjection(
-                event.getAggregateId(), WITHDRAWAL, event.getAmount(), event.getTimestamp(), event.getVersion());
-        transactionsRepository.save(tx);
-    }
+  @Subscribe
+  @SuppressWarnings("unused")
+  public void handle(AccountWithdrawnEvent event) {
+    TransactionProjection tx = new TransactionProjection(
+        event.getAggregateId(), WITHDRAWAL, event.getAmount(), event.getTimestamp(),
+        event.getVersion());
+    transactionsRepository.save(tx);
+  }
 }

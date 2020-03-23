@@ -20,17 +20,17 @@ import javax.ws.rs.core.Response;
 @Path("/accounts")
 public class AccountsResource {
 
-    private final AccountService accountService;
+  private final AccountService accountService;
 
-    public AccountsResource(AccountService accountService) {
-        this.accountService = checkNotNull(accountService);
-    }
+  public AccountsResource(AccountService accountService) {
+    this.accountService = checkNotNull(accountService);
+  }
 
-    @POST
-    public Response post(@Valid AccountDto accountDto) {
-        OpenAccountCommand command = new OpenAccountCommand(accountDto.getClientId());
-        Account account = accountService.process(command);
-        URI accountUri = fromResource(AccountResource.class).build(account.getId());
-        return Response.created(accountUri).build();
-    }
+  @POST
+  public Response post(@Valid AccountDto accountDto) {
+    OpenAccountCommand command = new OpenAccountCommand(accountDto.getClientId());
+    Account account = accountService.process(command);
+    URI accountUri = fromResource(AccountResource.class).build(account.getId());
+    return Response.created(accountUri).build();
+  }
 }

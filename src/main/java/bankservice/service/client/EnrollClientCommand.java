@@ -6,19 +6,19 @@ import bankservice.domain.model.client.Email;
 
 public class EnrollClientCommand {
 
-    private final String name;
-    private final Email email;
+  private final String name;
+  private final Email email;
 
-    public EnrollClientCommand(String name, Email email) {
-        this.name = checkNotNull(name);
-        this.email = checkNotNull(email);
-    }
+  public EnrollClientCommand(String name, Email email) {
+    this.name = checkNotNull(name);
+    this.email = checkNotNull(email);
+  }
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public Email getEmail() {
-        return email;
-    }
+  public Email getEmail() {
+    return email;
+  }
 }

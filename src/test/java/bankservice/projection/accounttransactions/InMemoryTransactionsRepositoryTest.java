@@ -15,19 +15,19 @@ import org.junit.jupiter.api.Test;
 
 class InMemoryTransactionsRepositoryTest {
 
-    private TransactionsRepository transactionsRepository =
-            new InMemoryTransactionsRepository();
+  private TransactionsRepository transactionsRepository =
+      new InMemoryTransactionsRepository();
 
-    @Test
-    void listEventsSortedByVersion() {
-        UUID accountId = randomUUID();
-        TransactionProjection tx2 = new TransactionProjection(accountId, DEPOSIT, TEN, now(UTC), 2);
-        TransactionProjection tx1 = new TransactionProjection(accountId, DEPOSIT, ONE, now(UTC), 1);
-        transactionsRepository.save(tx2);
-        transactionsRepository.save(tx1);
+  @Test
+  void listEventsSortedByVersion() {
+    UUID accountId = randomUUID();
+    TransactionProjection tx2 = new TransactionProjection(accountId, DEPOSIT, TEN, now(UTC), 2);
+    TransactionProjection tx1 = new TransactionProjection(accountId, DEPOSIT, ONE, now(UTC), 1);
+    transactionsRepository.save(tx2);
+    transactionsRepository.save(tx1);
 
-        List<TransactionProjection> transactions = transactionsRepository.listByAccount(accountId);
-        assertThat(transactions.get(0), equalTo(tx1));
-        assertThat(transactions.get(1), equalTo(tx2));
-    }
+    List<TransactionProjection> transactions = transactionsRepository.listByAccount(accountId);
+    assertThat(transactions.get(0), equalTo(tx1));
+    assertThat(transactions.get(1), equalTo(tx2));
+  }
 }

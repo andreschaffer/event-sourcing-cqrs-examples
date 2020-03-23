@@ -11,22 +11,22 @@ import org.junit.jupiter.api.Test;
 
 class AccountIT extends BaseIT {
 
-    @Test
-    void returnAccount() {
-        String clientId = UUID.randomUUID().toString();
-        String accountId = stateSetup.newAccount(clientId);
-        Response response = resourcesClient.getAccount(accountId);
-        JsonNode account = response.readEntity(JsonNode.class);
-        assertThat(account.get("id").asText(), equalTo(accountId));
-        assertThat(account.get("clientId").asText(), equalTo(clientId.toString()));
-        assertThat(account.get("balance").asDouble(), equalTo(0.0));
-        assertThat(response.getStatus(), equalTo(200));
-    }
+  @Test
+  void returnAccount() {
+    String clientId = UUID.randomUUID().toString();
+    String accountId = stateSetup.newAccount(clientId);
+    Response response = resourcesClient.getAccount(accountId);
+    JsonNode account = response.readEntity(JsonNode.class);
+    assertThat(account.get("id").asText(), equalTo(accountId));
+    assertThat(account.get("clientId").asText(), equalTo(clientId.toString()));
+    assertThat(account.get("balance").asDouble(), equalTo(0.0));
+    assertThat(response.getStatus(), equalTo(200));
+  }
 
-    @Test
-    void returnAccountNotFound() {
-        Response response = resourcesClient.getAccount(randomUUID().toString());
-        response.close();
-        assertThat(response.getStatus(), equalTo(404));
-    }
+  @Test
+  void returnAccountNotFound() {
+    Response response = resourcesClient.getAccount(randomUUID().toString());
+    response.close();
+    assertThat(response.getStatus(), equalTo(404));
+  }
 }

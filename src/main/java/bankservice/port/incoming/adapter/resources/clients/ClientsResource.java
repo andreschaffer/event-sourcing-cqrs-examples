@@ -4,8 +4,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static javax.ws.rs.core.UriBuilder.fromResource;
 
-import bankservice.domain.model.client.Email;
 import bankservice.domain.model.client.Client;
+import bankservice.domain.model.client.Email;
 import bankservice.service.client.ClientService;
 import bankservice.service.client.EnrollClientCommand;
 import java.net.URI;
@@ -21,18 +21,18 @@ import javax.ws.rs.core.Response;
 @Path("/clients")
 public class ClientsResource {
 
-    private ClientService clientService;
+  private ClientService clientService;
 
-    public ClientsResource(ClientService clientService) {
-        this.clientService = checkNotNull(clientService);
-    }
+  public ClientsResource(ClientService clientService) {
+    this.clientService = checkNotNull(clientService);
+  }
 
-    @POST
-    public Response post(@Valid ClientDto newClientDto) {
-        EnrollClientCommand enrollClientCommand = new EnrollClientCommand(
-            newClientDto.getName(), new Email(newClientDto.getEmail()));
-        Client client = clientService.process(enrollClientCommand);
-        URI clientUri = fromResource(ClientResource.class).build(client.getId());
-        return Response.created(clientUri).build();
-    }
+  @POST
+  public Response post(@Valid ClientDto newClientDto) {
+    EnrollClientCommand enrollClientCommand = new EnrollClientCommand(
+        newClientDto.getName(), new Email(newClientDto.getEmail()));
+    Client client = clientService.process(enrollClientCommand);
+    URI clientUri = fromResource(ClientResource.class).build(client.getId());
+    return Response.created(clientUri).build();
+  }
 }

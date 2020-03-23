@@ -18,23 +18,24 @@ import org.junit.jupiter.api.Test;
 
 class HealthCheckIT extends BaseIT {
 
-    private static Client client;
+  private static Client client;
 
-    @BeforeAll
-    static void setUpClass() {
-        client = new JerseyClientBuilder(BANK_SERVICE.getEnvironment())
-                .build(HealthCheckIT.class.getName())
-                .register(new LoggingFeature(getLogger(DEFAULT_LOGGER_NAME), INFO, PAYLOAD_ANY, 1024));
-    }
+  @BeforeAll
+  static void setUpClass() {
+    client = new JerseyClientBuilder(BANK_SERVICE.getEnvironment())
+        .build(HealthCheckIT.class.getName())
+        .register(new LoggingFeature(getLogger(DEFAULT_LOGGER_NAME), INFO, PAYLOAD_ANY, 1024));
+  }
 
-    @Test
-    void overallHealth() {
-        Response response = client.target(healthCheckUrl()).request().get();
-        response.close();
-        assertThat(response.getStatus(), equalTo(200));
-    }
+  @Test
+  void overallHealth() {
+    Response response = client.target(healthCheckUrl()).request().get();
+    response.close();
+    assertThat(response.getStatus(), equalTo(200));
+  }
 
-    private URI healthCheckUrl() {
-        return fromUri("http://localhost").port(BANK_SERVICE.getAdminPort()).path("healthcheck").build();
-    }
+  private URI healthCheckUrl() {
+    return fromUri("http://localhost").port(BANK_SERVICE.getAdminPort()).path("healthcheck")
+        .build();
+  }
 }
