@@ -1,5 +1,5 @@
 ![Build](https://github.com/andreschaffer/event-sourcing-cqrs-examples/workflows/Build/badge.svg)
-[![Coverage Status](https://coveralls.io/repos/github/andreschaffer/event-sourcing-cqrs-examples/badge.svg?branch=master)](https://coveralls.io/github/andreschaffer/event-sourcing-cqrs-examples?branch=master)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/299df5b2515003778612/test_coverage)](https://codeclimate.com/github/andreschaffer/event-sourcing-cqrs-examples/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/299df5b2515003778612/maintainability)](https://codeclimate.com/github/andreschaffer/event-sourcing-cqrs-examples/maintainability)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=andreschaffer/event-sourcing-cqrs-examples)](https://dependabot.com)
 
