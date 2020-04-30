@@ -103,20 +103,20 @@ If you are interested in this topic, we also recommend reading about [Lamport ti
 
 ### Examples of use
 #### Create a client
-` curl -vvv -X POST -H "Content-Type: application/json" -d '{"name":"Jane Doe", "email":"jane.doe@example.com"}' http://localhost:8080/clients `
+` curl -v -X POST -H "Content-Type: application/json" -d '{"name":"Jane Doe", "email":"jane.doe@example.com"}' http://localhost:8080/clients `
 
-Check the created client from the response 'Location' header
+Check the created client in the response's 'Location' header.
 
 #### Create an account for the client
-` curl -vvv -X POST -H "Content-Type: application/json" -d '{"clientId":"{CLIENT_ID}"}' http://localhost:8080/accounts `
+` curl -v -X POST -H "Content-Type: application/json" -d '{"clientId":"{CLIENT_ID}"}' http://localhost:8080/accounts `
 
-Check the created account from the response 'Location' header
+Check the created account in the response's 'Location' header.
 
 #### Make a deposit to the account
-` curl -vvv -X POST -H "Content-Type: application/json" -d '{"amount":1000000}' http://localhost:8080/accounts/{ACCOUNT_ID}/deposits `
+` curl -v -X POST -H "Content-Type: application/json" -d '{"amount":1000000}' http://localhost:8080/accounts/{ACCOUNT_ID}/deposits `
 
 #### Check that you created a millionare!
-` curl -vvv http://localhost:8080/accounts/{ACCOUNT_ID} `
+` curl -v http://localhost:8080/accounts/{ACCOUNT_ID} `
 
 #### More operations
 Go ahead and check the code! :)
