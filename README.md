@@ -92,7 +92,7 @@ If you are interested in this topic, we also recommend reading about [Lamport ti
 
 ## Trying it out
 ### Requirements
-- Java 12
+- Java 14
 - Maven
 
 ### Building the application
