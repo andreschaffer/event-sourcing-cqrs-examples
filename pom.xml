@@ -9,9 +9,9 @@
   <version>1.0-SNAPSHOT</version>
 
   <properties>
-    <java.version>12</java.version>
-    <dropwizard.version>2.0.9</dropwizard.version>
-    <jersey.version>2.30.1</jersey.version>
+    <java.version>14</java.version>
+    <dropwizard.version>2.0.10</dropwizard.version>
+    <jersey.version>2.31</jersey.version>
     <junit.version>5.6.2</junit.version>
     <mvn-test-plugins.version>3.0.0-M4</mvn-test-plugins.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -115,8 +115,7 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
         <configuration>
-          <source>${java.version}</source>
-          <target>${java.version}</target>
+          <release>${java.version}</release>
           <showWarnings>true</showWarnings>
           <failOnWarning>true</failOnWarning>
           <compilerArgs>
