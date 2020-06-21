@@ -16,6 +16,9 @@
     <mvn-test-plugins.version>3.0.0-M5</mvn-test-plugins.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <automatic-module.name>bank.service</automatic-module.name>
+    <argLine>--add-opens java.base/java.math=${automatic-module.name}
+             --add-opens java.base/java.time=${automatic-module.name}</argLine>
   </properties>
 
   <dependencies>
