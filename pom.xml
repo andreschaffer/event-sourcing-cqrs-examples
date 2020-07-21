@@ -10,7 +10,7 @@
 
   <properties>
     <java.version>14</java.version>
-    <dropwizard.version>2.0.10</dropwizard.version>
+    <dropwizard.version>2.0.12</dropwizard.version>
     <jersey.version>2.31</jersey.version>
     <junit.version>5.6.2</junit.version>
     <mvn-test-plugins.version>3.0.0-M5</mvn-test-plugins.version>
