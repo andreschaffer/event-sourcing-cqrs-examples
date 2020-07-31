@@ -11,7 +11,7 @@ public abstract class Event {
   private final ZonedDateTime timestamp;
   private final int version;
 
-  public Event(UUID aggregateId, ZonedDateTime timestamp, int version) {
+  protected Event(UUID aggregateId, ZonedDateTime timestamp, int version) {
     this.aggregateId = checkNotNull(aggregateId);
     this.timestamp = checkNotNull(timestamp);
     this.version = version;
