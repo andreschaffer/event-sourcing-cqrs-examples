@@ -10,9 +10,10 @@
 
   <properties>
     <java.version>14</java.version>
-    <dropwizard.version>2.0.10</dropwizard.version>
+    <dropwizard.version>2.0.12</dropwizard.version>
     <jersey.version>2.31</jersey.version>
     <junit.version>5.6.2</junit.version>
+    <error_prone.version>2.4.0</error_prone.version>
     <mvn-test-plugins.version>3.0.0-M5</mvn-test-plugins.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -108,6 +109,12 @@
         <artifactId>jersey-client</artifactId>
         <version>${jersey.version}</version>
       </dependency>
+
+      <dependency>
+        <groupId>com.google.errorprone</groupId>
+        <artifactId>error_prone_annotations</artifactId>
+        <version>${error_prone.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -129,7 +136,7 @@
             <path>
               <groupId>com.google.errorprone</groupId>
               <artifactId>error_prone_core</artifactId>
-              <version>2.3.4</version>
+              <version>${error_prone.version}</version>
             </path>
           </annotationProcessorPaths>
         </configuration>
