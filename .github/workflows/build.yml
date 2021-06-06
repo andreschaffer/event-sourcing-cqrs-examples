@@ -33,12 +33,14 @@ jobs:
         run: mvn -B verify -Pcode-coverage --file pom.xml
 
       - name: Code Coverage Report
+        env:
+          GIT_BRANCH: ${GITHUB_REF/refs\/heads\//}
+          JACOCO_SOURCE_PATH: src/main/java
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         run: |
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
           chmod +x ./cc-test-reporter
-          export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
-          export JACOCO_SOURCE_PATH=src/main/java
           ./cc-test-reporter format-coverage -t jacoco target/site/jacoco/jacoco.xml -o coverage/unit.json
           ./cc-test-reporter format-coverage -t jacoco target/site/jacoco-it/jacoco.xml -o coverage/it.json
           ./cc-test-reporter sum-coverage coverage/*.json -p 2
-          ./cc-test-reporter upload-coverage -r "${{ secrets.CC_TEST_REPORTER_ID }}"
+          ./cc-test-reporter upload-coverage
