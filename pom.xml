@@ -10,7 +10,7 @@
 
   <properties>
     <java.version>14</java.version>
-    <dropwizard.version>2.0.18</dropwizard.version>
+    <dropwizard.version>2.0.23</dropwizard.version>
     <jersey.version>2.32</jersey.version>
     <junit.version>5.7.1</junit.version>
     <error_prone.version>2.5.1</error_prone.version>
@@ -101,7 +101,7 @@
       <dependency>
         <groupId>org.checkerframework</groupId>
         <artifactId>checker-qual</artifactId>
-        <version>3.11.0</version>
+        <version>3.15.0</version>
       </dependency>
 
       <dependency>
@@ -289,7 +289,7 @@
           <plugin>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
-            <version>0.8.6</version>
+            <version>0.8.7</version>
             <executions>
               <execution>
                 <id>prepare-agent</id>
