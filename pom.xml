@@ -10,7 +10,7 @@
 
   <properties>
     <java.version>14</java.version>
-    <dropwizard.version>2.0.24</dropwizard.version>
+    <dropwizard.version>2.0.25</dropwizard.version>
     <jersey.version>2.33</jersey.version>
     <junit.version>5.7.2</junit.version>
     <error_prone.version>2.9.0</error_prone.version>
@@ -77,7 +77,7 @@
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
-      <version>3.12.4</version>
+      <version>4.0.0</version>
       <scope>test</scope>
     </dependency>
 
