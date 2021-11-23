@@ -23,7 +23,7 @@ jobs:
           distribution: 'adopt'
 
       - name: Cache
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v2.1.7
         with:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
