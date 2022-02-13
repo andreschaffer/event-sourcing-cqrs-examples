@@ -10,8 +10,8 @@
 
   <properties>
     <java.version>14</java.version>
-    <dropwizard.version>2.0.25</dropwizard.version>
-    <jersey.version>2.33</jersey.version>
+    <dropwizard.version>2.0.28</dropwizard.version>
+    <jersey.version>2.35</jersey.version>
     <junit.version>5.8.2</junit.version>
     <error_prone.version>2.11.0</error_prone.version>
     <mvn-test-plugins.version>3.0.0-M5</mvn-test-plugins.version>
@@ -106,7 +106,19 @@
 
       <dependency>
         <groupId>org.glassfish.jersey.core</groupId>
+        <artifactId>jersey-server</artifactId>
+        <version>${jersey.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.glassfish.jersey.core</groupId>
         <artifactId>jersey-client</artifactId>
+        <version>${jersey.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.glassfish.jersey.core</groupId>
+        <artifactId>jersey-common</artifactId>
         <version>${jersey.version}</version>
       </dependency>
 
