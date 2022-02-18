@@ -5,15 +5,14 @@ import static java.math.BigDecimal.TEN;
 import static java.util.UUID.randomUUID;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.anyInt;
-import static org.mockito.Mockito.anyListOf;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-import bankservice.domain.model.Event;
 import bankservice.domain.model.EventStore;
 import bankservice.domain.model.OptimisticLockingException;
 import bankservice.domain.model.account.Account;
@@ -52,7 +51,7 @@ class AccountServiceTest {
     doThrow(OptimisticLockingException.class)
         .doThrow(OptimisticLockingException.class)
         .doCallRealMethod()
-        .when(eventStore).store(eq(id), anyListOf(Event.class), anyInt());
+        .when(eventStore).store(eq(id), anyList(), anyInt());
 
     accountService.process(new WithdrawAccountCommand(id, ONE));
     int creationAttempts = 1;
@@ -61,7 +60,7 @@ class AccountServiceTest {
     int loadTimes = depositAttempts + withdrawalAttempts;
     int storeTimes = creationAttempts + depositAttempts + withdrawalAttempts;
     verify(eventStore, times(loadTimes)).load(eq(id));
-    verify(eventStore, times(storeTimes)).store(eq(id), anyListOf(Event.class), anyInt());
+    verify(eventStore, times(storeTimes)).store(eq(id), anyList(), anyInt());
     assertThat(eventBusCounter.eventsCount.get(AccountOpenedEvent.class), equalTo(1));
     assertThat(eventBusCounter.eventsCount.get(AccountDepositedEvent.class), equalTo(1));
     assertThat(eventBusCounter.eventsCount.get(AccountWithdrawnEvent.class), equalTo(1));
