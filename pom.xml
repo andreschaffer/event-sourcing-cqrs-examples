@@ -14,7 +14,7 @@
     <jersey.version>2.35</jersey.version>
     <junit.version>5.8.2</junit.version>
     <error_prone.version>2.14.0</error_prone.version>
-    <mvn-test-plugins.version>3.0.0-M6</mvn-test-plugins.version>
+    <mvn-test-plugins.version>3.0.0-M7</mvn-test-plugins.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <automatic-module.name>bank.service</automatic-module.name>
