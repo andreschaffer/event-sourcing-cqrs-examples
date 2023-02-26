@@ -1,6 +1,5 @@
 package bankservice.service.client;
 
-
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import bankservice.domain.model.client.Email;

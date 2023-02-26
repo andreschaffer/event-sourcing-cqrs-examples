@@ -22,8 +22,8 @@ public class ClientService {
   public ClientService(EventStore eventStore) {
     this.eventStore = checkNotNull(eventStore);
     int maxAttempts = 3;
-    this.conflictRetrier = new Retrier(singletonList(OptimisticLockingException.class),
-        maxAttempts);
+    this.conflictRetrier =
+        new Retrier(singletonList(OptimisticLockingException.class), maxAttempts);
   }
 
   public Optional<Client> loadClient(UUID id) {
@@ -47,13 +47,14 @@ public class ClientService {
   private Client process(UUID clientId, Consumer<Client> consumer)
       throws ClientNotFoundException, OptimisticLockingException {
 
-    return conflictRetrier.get(() -> {
-      Optional<Client> possibleClient = loadClient(clientId);
-      Client client = possibleClient.orElseThrow(() -> new ClientNotFoundException(clientId));
-      consumer.accept(client);
-      storeEvents(client);
-      return client;
-    });
+    return conflictRetrier.get(
+        () -> {
+          Optional<Client> possibleClient = loadClient(clientId);
+          Client client = possibleClient.orElseThrow(() -> new ClientNotFoundException(clientId));
+          consumer.accept(client);
+          storeEvents(client);
+          return client;
+        });
   }
 
   private void storeEvents(Client client) {

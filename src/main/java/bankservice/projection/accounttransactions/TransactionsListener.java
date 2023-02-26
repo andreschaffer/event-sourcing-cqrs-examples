@@ -19,18 +19,26 @@ public class TransactionsListener {
   @Subscribe
   @SuppressWarnings("unused")
   public void handle(AccountDepositedEvent event) {
-    TransactionProjection tx = new TransactionProjection(
-        event.getAggregateId(), DEPOSIT, event.getAmount(), event.getTimestamp(),
-        event.getVersion());
+    TransactionProjection tx =
+        new TransactionProjection(
+            event.getAggregateId(),
+            DEPOSIT,
+            event.getAmount(),
+            event.getTimestamp(),
+            event.getVersion());
     transactionsRepository.save(tx);
   }
 
   @Subscribe
   @SuppressWarnings("unused")
   public void handle(AccountWithdrawnEvent event) {
-    TransactionProjection tx = new TransactionProjection(
-        event.getAggregateId(), WITHDRAWAL, event.getAmount(), event.getTimestamp(),
-        event.getVersion());
+    TransactionProjection tx =
+        new TransactionProjection(
+            event.getAggregateId(),
+            WITHDRAWAL,
+            event.getAmount(),
+            event.getTimestamp(),
+            event.getVersion());
     transactionsRepository.save(tx);
   }
 }

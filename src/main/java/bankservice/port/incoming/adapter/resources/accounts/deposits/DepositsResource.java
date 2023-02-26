@@ -31,8 +31,8 @@ public class DepositsResource {
   public Response post(@PathParam("id") UUIDParam accountId, @Valid DepositDto depositDto)
       throws AccountNotFoundException, OptimisticLockingException {
 
-    DepositAccountCommand command = new DepositAccountCommand(accountId.get(),
-        depositDto.getAmount());
+    DepositAccountCommand command =
+        new DepositAccountCommand(accountId.get(), depositDto.getAmount());
     accountService.process(command);
     return Response.noContent().build();
   }

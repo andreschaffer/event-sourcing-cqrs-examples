@@ -33,7 +33,6 @@ class AccountTest {
     assertThat(account.getId(), equalTo(id));
     assertThat(account.getClientId(), equalTo(clientId));
     assertThat(account.getBalance(), equalTo(ZERO));
-
   }
 
   @Test
@@ -71,8 +70,6 @@ class AccountTest {
   @Test
   void failsWithdrawalWithNonSufficientFunds() {
     Account account = new Account(randomUUID(), randomUUID());
-    assertThrows(
-        NonSufficientFundsException.class,
-        () -> account.withdraw(BigDecimal.valueOf(1)));
+    assertThrows(NonSufficientFundsException.class, () -> account.withdraw(BigDecimal.valueOf(1)));
   }
 }

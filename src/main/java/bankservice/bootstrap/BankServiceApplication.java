@@ -49,7 +49,8 @@ public class BankServiceApplication extends Application<Configuration> {
   }
 
   private void registerFilters(Environment environment) {
-    environment.jersey()
+    environment
+        .jersey()
         .register(new LoggingFeature(getLogger(DEFAULT_LOGGER_NAME), INFO, PAYLOAD_ANY, 1024));
   }
 

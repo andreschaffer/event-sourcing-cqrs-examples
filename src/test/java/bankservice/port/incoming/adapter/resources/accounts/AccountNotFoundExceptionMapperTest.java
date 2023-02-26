@@ -22,16 +22,20 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @ExtendWith(DropwizardExtensionsSupport.class)
 class AccountNotFoundExceptionMapperTest {
 
-  static final ResourceExtension RESOURCES = ResourceExtension.builder()
-      .addProvider(AccountNotFoundExceptionMapper.class)
-      .addResource(new NeverFoundAccountResource())
-      .build();
+  static final ResourceExtension RESOURCES =
+      ResourceExtension.builder()
+          .addProvider(AccountNotFoundExceptionMapper.class)
+          .addResource(new NeverFoundAccountResource())
+          .build();
 
   @Test
   void returnNotFound() {
-    Response response = RESOURCES.client()
-        .target(format("/never-found-account-resource/%s", randomUUID()))
-        .request().get();
+    Response response =
+        RESOURCES
+            .client()
+            .target(format("/never-found-account-resource/%s", randomUUID()))
+            .request()
+            .get();
     response.close();
     assertThat(response.getStatus(), equalTo(404));
     assertThat(calls, equalTo(1));

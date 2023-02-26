@@ -12,8 +12,12 @@ public class AccountWithdrawnEvent extends Event {
   private final BigDecimal amount;
   private final BigDecimal balance;
 
-  public AccountWithdrawnEvent(UUID aggregateId, ZonedDateTime timestamp, int version,
-      BigDecimal amount, BigDecimal balance) {
+  public AccountWithdrawnEvent(
+      UUID aggregateId,
+      ZonedDateTime timestamp,
+      int version,
+      BigDecimal amount,
+      BigDecimal balance) {
     super(aggregateId, timestamp, version);
     this.amount = checkNotNull(amount);
     this.balance = checkNotNull(balance);

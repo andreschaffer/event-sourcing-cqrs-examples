@@ -25,8 +25,7 @@ class EmailSpecificationTest {
         Arguments.of("email@example.web", false),
         Arguments.of("email@111.222.333.4444", false),
         Arguments.of("email@example..com", false),
-        Arguments.of("abc..123@example.com", false)
-    );
+        Arguments.of("abc..123@example.com", false));
   }
 
   @MethodSource("emails")

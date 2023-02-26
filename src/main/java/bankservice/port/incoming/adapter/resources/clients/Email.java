@@ -24,14 +24,12 @@ public @interface Email {
 
   Class<? extends Payload>[] payload() default {};
 
-
   class EmailValidator implements ConstraintValidator<Email, String> {
 
     private EmailSpecification emailSpecification = new EmailSpecification();
 
     @Override
-    public void initialize(Email constraintAnnotation) {
-    }
+    public void initialize(Email constraintAnnotation) {}
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {

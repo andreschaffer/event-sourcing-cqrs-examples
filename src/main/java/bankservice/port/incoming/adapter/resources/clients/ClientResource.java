@@ -43,8 +43,9 @@ public class ClientResource {
 
   @PUT
   public Response put(@PathParam("id") UUIDParam clientId, @Valid @NotNull ClientDto clientDto) {
-    UpdateClientCommand command = new UpdateClientCommand(
-        clientId.get(), clientDto.getName(), new Email(clientDto.getEmail()));
+    UpdateClientCommand command =
+        new UpdateClientCommand(
+            clientId.get(), clientDto.getName(), new Email(clientDto.getEmail()));
     clientService.process(command);
     return Response.noContent().build();
   }

@@ -18,16 +18,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @ExtendWith(DropwizardExtensionsSupport.class)
 class OptimisticLockingExceptionMapperTest {
 
-  static final ResourceExtension RESOURCES = ResourceExtension.builder()
-      .addProvider(OptimisticLockingExceptionMapper.class)
-      .addResource(new ConcurrentlyModifiedResource())
-      .build();
+  static final ResourceExtension RESOURCES =
+      ResourceExtension.builder()
+          .addProvider(OptimisticLockingExceptionMapper.class)
+          .addResource(new ConcurrentlyModifiedResource())
+          .build();
 
   @Test
   void returnConflict() {
-    Response response = RESOURCES.client()
-        .target("/concurrently-modified-resource")
-        .request().put(json("{}"));
+    Response response =
+        RESOURCES.client().target("/concurrently-modified-resource").request().put(json("{}"));
     response.close();
     assertThat(response.getStatus(), equalTo(409));
   }

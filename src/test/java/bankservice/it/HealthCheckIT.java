@@ -22,9 +22,10 @@ class HealthCheckIT extends BaseIT {
 
   @BeforeAll
   static void setUpClass() {
-    client = new JerseyClientBuilder(BANK_SERVICE.getEnvironment())
-        .build(HealthCheckIT.class.getName())
-        .register(new LoggingFeature(getLogger(DEFAULT_LOGGER_NAME), INFO, PAYLOAD_ANY, 1024));
+    client =
+        new JerseyClientBuilder(BANK_SERVICE.getEnvironment())
+            .build(HealthCheckIT.class.getName())
+            .register(new LoggingFeature(getLogger(DEFAULT_LOGGER_NAME), INFO, PAYLOAD_ANY, 1024));
   }
 
   @Test
@@ -35,7 +36,9 @@ class HealthCheckIT extends BaseIT {
   }
 
   private URI healthCheckUrl() {
-    return fromUri("http://localhost").port(BANK_SERVICE.getAdminPort()).path("healthcheck")
+    return fromUri("http://localhost")
+        .port(BANK_SERVICE.getAdminPort())
+        .path("healthcheck")
         .build();
   }
 }

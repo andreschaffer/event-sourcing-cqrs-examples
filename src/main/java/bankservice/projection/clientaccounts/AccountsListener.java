@@ -18,22 +18,23 @@ public class AccountsListener {
   @Subscribe
   @SuppressWarnings("unused")
   public void handle(AccountOpenedEvent event) {
-    AccountProjection accountProjection = new AccountProjection(
-        event.getAggregateId(), event.getClientId(), event.getBalance(), event.getVersion());
+    AccountProjection accountProjection =
+        new AccountProjection(
+            event.getAggregateId(), event.getClientId(), event.getBalance(), event.getVersion());
     accountsRepository.save(accountProjection);
   }
 
   @Subscribe
   @SuppressWarnings("unused")
   public void handle(AccountDepositedEvent event) {
-    accountsRepository
-        .updateBalance(event.getAggregateId(), event.getBalance(), event.getVersion());
+    accountsRepository.updateBalance(
+        event.getAggregateId(), event.getBalance(), event.getVersion());
   }
 
   @Subscribe
   @SuppressWarnings("unused")
   public void handle(AccountWithdrawnEvent event) {
-    accountsRepository
-        .updateBalance(event.getAggregateId(), event.getBalance(), event.getVersion());
+    accountsRepository.updateBalance(
+        event.getAggregateId(), event.getBalance(), event.getVersion());
   }
 }

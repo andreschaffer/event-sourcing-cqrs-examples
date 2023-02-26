@@ -15,8 +15,7 @@ import org.junit.jupiter.api.Test;
 
 class InMemoryTransactionsRepositoryTest {
 
-  private TransactionsRepository transactionsRepository =
-      new InMemoryTransactionsRepository();
+  private TransactionsRepository transactionsRepository = new InMemoryTransactionsRepository();
 
   @Test
   void listEventsSortedByVersion() {

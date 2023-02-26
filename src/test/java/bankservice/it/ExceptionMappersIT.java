@@ -1,6 +1,5 @@
 package bankservice.it;
 
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import bankservice.port.incoming.adapter.resources.OptimisticLockingExceptionMapper;

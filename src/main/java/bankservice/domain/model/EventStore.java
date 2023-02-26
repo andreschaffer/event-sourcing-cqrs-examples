@@ -9,5 +9,4 @@ public interface EventStore {
       throws OptimisticLockingException;
 
   List<Event> load(UUID aggregateId);
-
 }

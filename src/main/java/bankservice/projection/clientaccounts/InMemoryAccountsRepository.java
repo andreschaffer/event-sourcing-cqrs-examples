@@ -25,18 +25,19 @@ public class InMemoryAccountsRepository implements AccountsRepository {
         (oldValue, value) -> {
           oldValue.putAll(value);
           return oldValue;
-        }
-    );
+        });
     accountClientIndex.put(accountProjection.getAccountId(), accountProjection.getClientId());
   }
 
   @Override
   public void updateBalance(UUID accountId, BigDecimal balance, int version) {
     UUID clientId = accountClientIndex.get(accountId);
-    clientAccounts.get(clientId).merge(
-        accountId,
-        new AccountProjection(accountId, clientId, balance, version),
-        (oldValue, value) -> value.getVersion() > oldValue.getVersion() ? value : oldValue);
+    clientAccounts
+        .get(clientId)
+        .merge(
+            accountId,
+            new AccountProjection(accountId, clientId, balance, version),
+            (oldValue, value) -> value.getVersion() > oldValue.getVersion() ? value : oldValue);
   }
 
   @Override
@@ -47,7 +48,7 @@ public class InMemoryAccountsRepository implements AccountsRepository {
 
   private Map<UUID, AccountProjection> newAccountsMap(AccountProjection accountProjection) {
     return Stream.of(
-        new AbstractMap.SimpleEntry<>(accountProjection.getAccountId(), accountProjection))
+            new AbstractMap.SimpleEntry<>(accountProjection.getAccountId(), accountProjection))
         .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
   }
 }

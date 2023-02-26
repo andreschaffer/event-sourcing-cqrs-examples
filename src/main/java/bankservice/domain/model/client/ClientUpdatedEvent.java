@@ -11,8 +11,8 @@ public class ClientUpdatedEvent extends Event {
   private final String name;
   private final String email;
 
-  public ClientUpdatedEvent(UUID aggregateId, ZonedDateTime timestamp, int version, String name,
-      Email email) {
+  public ClientUpdatedEvent(
+      UUID aggregateId, ZonedDateTime timestamp, int version, String name, Email email) {
     super(aggregateId, timestamp, version);
     this.name = checkNotNull(name);
     this.email = checkNotNull(email).getValue();

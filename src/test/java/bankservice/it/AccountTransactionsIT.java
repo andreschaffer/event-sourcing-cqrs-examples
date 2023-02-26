@@ -26,7 +26,8 @@ class AccountTransactionsIT extends BaseIT {
   @Test
   void returnTransactions() {
     String accountId = stateSetup.newAccount(randomUUID().toString());
-    resourcesClient.postDeposit(accountId, resourcesDtos.depositDto(BigDecimal.valueOf(99)))
+    resourcesClient
+        .postDeposit(accountId, resourcesDtos.depositDto(BigDecimal.valueOf(99)))
         .close();
     resourcesClient.postDeposit(accountId, resourcesDtos.depositDto(ONE)).close();
     resourcesClient.postWithdrawal(accountId, resourcesDtos.withdrawalDto(TEN)).close();
