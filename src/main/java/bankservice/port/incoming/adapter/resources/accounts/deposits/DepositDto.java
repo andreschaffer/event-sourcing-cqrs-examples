@@ -12,9 +12,7 @@ public class DepositDto {
   @JsonProperty(access = READ_ONLY)
   private UUID accountId;
 
-  @NotNull
-  private BigDecimal amount;
-
+  @NotNull private BigDecimal amount;
 
   @SuppressWarnings("unused")
   public UUID getAccountId() {

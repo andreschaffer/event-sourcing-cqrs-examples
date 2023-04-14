@@ -17,8 +17,8 @@ public class Account extends Aggregate {
 
   public Account(UUID id, UUID clientId) {
     super(id);
-    AccountOpenedEvent accountOpenedEvent = new AccountOpenedEvent(
-        id, now(UTC), getNextVersion(), clientId, ZERO);
+    AccountOpenedEvent accountOpenedEvent =
+        new AccountOpenedEvent(id, now(UTC), getNextVersion(), clientId, ZERO);
     applyNewEvent(accountOpenedEvent);
   }
 
@@ -28,8 +28,8 @@ public class Account extends Aggregate {
 
   public void deposit(BigDecimal amount) {
     BigDecimal newBalance = balance.add(amount);
-    AccountDepositedEvent accountDepositedEvent = new AccountDepositedEvent(
-        getId(), now(UTC), getNextVersion(), amount, newBalance);
+    AccountDepositedEvent accountDepositedEvent =
+        new AccountDepositedEvent(getId(), now(UTC), getNextVersion(), amount, newBalance);
     applyNewEvent(accountDepositedEvent);
   }
 
@@ -38,8 +38,8 @@ public class Account extends Aggregate {
     if (newBalance.signum() == -1) {
       throw new NonSufficientFundsException(getId(), balance, amount);
     }
-    AccountWithdrawnEvent accountWithdrawnEvent = new AccountWithdrawnEvent(
-        getId(), now(UTC), getNextVersion(), amount, newBalance);
+    AccountWithdrawnEvent accountWithdrawnEvent =
+        new AccountWithdrawnEvent(getId(), now(UTC), getNextVersion(), amount, newBalance);
     applyNewEvent(accountWithdrawnEvent);
   }
 

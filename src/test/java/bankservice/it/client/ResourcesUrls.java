@@ -41,22 +41,38 @@ public class ResourcesUrls {
   }
 
   public URI depositsUrl(String accountId) {
-    return fromUri("http://localhost").port(port)
-        .path("accounts").path("{id}").path("deposits").build(accountId);
+    return fromUri("http://localhost")
+        .port(port)
+        .path("accounts")
+        .path("{id}")
+        .path("deposits")
+        .build(accountId);
   }
 
   public URI withdrawalsUrl(String accountId) {
-    return fromUri("http://localhost").port(port)
-        .path("accounts").path("{id}").path("withdrawals").build(accountId);
+    return fromUri("http://localhost")
+        .port(port)
+        .path("accounts")
+        .path("{id}")
+        .path("withdrawals")
+        .build(accountId);
   }
 
   public URI clientAccountsUrl(String clientId) {
-    return fromUri("http://localhost").port(port).path("clients").path("{id}").path("accounts")
+    return fromUri("http://localhost")
+        .port(port)
+        .path("clients")
+        .path("{id}")
+        .path("accounts")
         .build(clientId.toString());
   }
 
   public URI accountTransactionsUrl(String accountId) {
-    return fromUri("http://localhost").port(port)
-        .path("accounts").path("{id}").path("transactions").build(accountId);
+    return fromUri("http://localhost")
+        .port(port)
+        .path("accounts")
+        .path("{id}")
+        .path("transactions")
+        .build(accountId);
   }
 }

@@ -17,21 +17,17 @@ class AggregateTest {
 
   @Test
   void newAggregateHasBaseVersion0() {
-    Aggregate aggregate = new Aggregate(randomUUID()) {
-    };
+    Aggregate aggregate = new Aggregate(randomUUID()) {};
     assertThat(aggregate.getBaseVersion(), equalTo(0));
   }
 
   @Test
   void newEventsListIsImmutable() {
     UUID id = randomUUID();
-    Aggregate aggregate = new Aggregate(id) {
-    };
+    Aggregate aggregate = new Aggregate(id) {};
     assertThrows(
         UnsupportedOperationException.class,
-        () -> aggregate.getNewEvents().add(new Event(id, now(UTC), 1) {
-        })
-    );
+        () -> aggregate.getNewEvents().add(new Event(id, now(UTC), 1) {}));
   }
 
   @Test
@@ -46,14 +42,9 @@ class AggregateTest {
   @Test
   void failReplayOfEventWithoutProperChildClassMethodHandler() {
     UUID id = randomUUID();
-    Event eventWithoutCorrespondingHandler = new Event(id, now(UTC), 1) {
-    };
+    Event eventWithoutCorrespondingHandler = new Event(id, now(UTC), 1) {};
     List<Event> eventStream = singletonList(eventWithoutCorrespondingHandler);
-    assertThrows(
-        UnsupportedOperationException.class,
-        () -> new Aggregate(id, eventStream) {
-        }
-    );
+    assertThrows(UnsupportedOperationException.class, () -> new Aggregate(id, eventStream) {});
   }
 
   @Test
@@ -62,10 +53,7 @@ class AggregateTest {
     ArithmeticException replayException = new ArithmeticException();
     ProblematicEvent problematicEvent = new ProblematicEvent(id, now(UTC), 1, replayException);
     List<Event> eventStream = singletonList(problematicEvent);
-    assertThrows(
-        ArithmeticException.class,
-        () -> new BackCallerAggregate(id, eventStream)
-    );
+    assertThrows(ArithmeticException.class, () -> new BackCallerAggregate(id, eventStream));
   }
 
   @Test
@@ -80,8 +68,7 @@ class AggregateTest {
 
   @Test
   void nextVersionOfEmptyEventStreamIs1() {
-    Aggregate aggregate = new Aggregate(randomUUID()) {
-    };
+    Aggregate aggregate = new Aggregate(randomUUID()) {};
     assertThat(aggregate.getNextVersion(), equalTo(1));
     assertThat(aggregate.getNextVersion(), equalTo(1));
   }
@@ -104,8 +91,7 @@ class AggregateTest {
     Aggregate aggregate = new BackCallerAggregate(id, eventStream);
     assertThrows(
         IllegalArgumentException.class,
-        () -> aggregate.applyNewEvent(new DummyEvent(id, now(UTC), 1))
-    );
+        () -> aggregate.applyNewEvent(new DummyEvent(id, now(UTC), 1)));
   }
 
   private static class BackCallerAggregate extends Aggregate {
@@ -146,8 +132,8 @@ class AggregateTest {
 
     private RuntimeException exception;
 
-    private ProblematicEvent(UUID aggregateId, ZonedDateTime timestamp, int version,
-        RuntimeException exception) {
+    private ProblematicEvent(
+        UUID aggregateId, ZonedDateTime timestamp, int version, RuntimeException exception) {
       super(aggregateId, timestamp, version);
       this.exception = exception;
     }

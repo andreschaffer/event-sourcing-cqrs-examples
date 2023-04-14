@@ -22,11 +22,12 @@ public class ResourcesClient {
   private final ResourcesUrls resourcesUrls;
 
   public ResourcesClient(Environment environment, int port) {
-    this.client = new JerseyClientBuilder(checkNotNull(environment))
-        .build(ResourcesClient.class.getName())
-        .property(CONNECT_TIMEOUT, 2000)
-        .property(READ_TIMEOUT, 3000)
-        .register(new LoggingFeature(getLogger(DEFAULT_LOGGER_NAME), INFO, PAYLOAD_ANY, 1024));
+    this.client =
+        new JerseyClientBuilder(checkNotNull(environment))
+            .build(ResourcesClient.class.getName())
+            .property(CONNECT_TIMEOUT, 2000)
+            .property(READ_TIMEOUT, 3000)
+            .register(new LoggingFeature(getLogger(DEFAULT_LOGGER_NAME), INFO, PAYLOAD_ANY, 1024));
     this.resourcesUrls = new ResourcesUrls(port);
   }
 
@@ -59,7 +60,9 @@ public class ResourcesClient {
   }
 
   public Response postWithdrawal(String accountId, JsonNode withdrawalDto) {
-    return client.target(resourcesUrls.withdrawalsUrl(accountId)).request()
+    return client
+        .target(resourcesUrls.withdrawalsUrl(accountId))
+        .request()
         .post(json(withdrawalDto));
   }
 

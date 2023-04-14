@@ -23,12 +23,9 @@ class InMemoryEventStoreTest {
   @Test
   void storeEventsInOrder() {
     UUID aggregateId = randomUUID();
-    Event e1 = new Event(aggregateId, now(UTC), 1) {
-    };
-    Event e2 = new Event(aggregateId, now(UTC), 2) {
-    };
-    Event e3 = new Event(aggregateId, now(UTC), 3) {
-    };
+    Event e1 = new Event(aggregateId, now(UTC), 1) {};
+    Event e2 = new Event(aggregateId, now(UTC), 2) {};
+    Event e3 = new Event(aggregateId, now(UTC), 3) {};
     eventStore.store(aggregateId, newArrayList(e1), 0);
     eventStore.store(aggregateId, newArrayList(e2), 1);
     eventStore.store(aggregateId, newArrayList(e3), 2);
@@ -43,29 +40,22 @@ class InMemoryEventStoreTest {
   @Test
   void optimisticLocking() {
     UUID aggregateId = randomUUID();
-    Event e1 = new Event(aggregateId, now(UTC), 1) {
-    };
-    Event e2 = new Event(aggregateId, now(UTC), 2) {
-    };
-    Event e3 = new Event(aggregateId, now(UTC), 2) {
-    };
+    Event e1 = new Event(aggregateId, now(UTC), 1) {};
+    Event e2 = new Event(aggregateId, now(UTC), 2) {};
+    Event e3 = new Event(aggregateId, now(UTC), 2) {};
     eventStore.store(aggregateId, newArrayList(e1), 0);
     eventStore.store(aggregateId, newArrayList(e2), 1);
     assertThrows(
-        OptimisticLockingException.class,
-        () -> eventStore.store(aggregateId, newArrayList(e3), 1)
-    );
+        OptimisticLockingException.class, () -> eventStore.store(aggregateId, newArrayList(e3), 1));
   }
 
   @Test
   void loadedEventStreamIsImmutable() {
     UUID aggregateId = randomUUID();
-    Event e1 = new Event(aggregateId, now(UTC), 1) {
-    };
+    Event e1 = new Event(aggregateId, now(UTC), 1) {};
     eventStore.store(aggregateId, newArrayList(e1), 0);
     assertThrows(
         UnsupportedOperationException.class,
-        () -> eventStore.load(aggregateId).add(mock(Event.class))
-    );
+        () -> eventStore.load(aggregateId).add(mock(Event.class)));
   }
 }

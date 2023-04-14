@@ -14,8 +14,12 @@ public class TransactionProjection {
   private final ZonedDateTime timestamp;
   private final int version;
 
-  public TransactionProjection(UUID accountId, TransactionType type, BigDecimal amount,
-      ZonedDateTime timestamp, int version) {
+  public TransactionProjection(
+      UUID accountId,
+      TransactionType type,
+      BigDecimal amount,
+      ZonedDateTime timestamp,
+      int version) {
     this.accountId = checkNotNull(accountId);
     this.type = checkNotNull(type);
     this.amount = checkNotNull(amount).setScale(2, BigDecimal.ROUND_HALF_UP);
@@ -44,6 +48,7 @@ public class TransactionProjection {
   }
 
   public enum TransactionType {
-    DEPOSIT, WITHDRAWAL
+    DEPOSIT,
+    WITHDRAWAL
   }
 }

@@ -20,8 +20,8 @@ public class Client extends Aggregate {
     super(id);
     validateName(name);
     validateEmail(email);
-    ClientEnrolledEvent clientEnrolledEvent = new ClientEnrolledEvent(
-        id, now(UTC), getNextVersion(), name, email);
+    ClientEnrolledEvent clientEnrolledEvent =
+        new ClientEnrolledEvent(id, now(UTC), getNextVersion(), name, email);
     applyNewEvent(clientEnrolledEvent);
   }
 
@@ -30,8 +30,8 @@ public class Client extends Aggregate {
   }
 
   public void update(String name, Email email) {
-    ClientUpdatedEvent clientUpdatedEvent = new ClientUpdatedEvent(
-        getId(), now(UTC), getNextVersion(), name, email);
+    ClientUpdatedEvent clientUpdatedEvent =
+        new ClientUpdatedEvent(getId(), now(UTC), getNextVersion(), name, email);
     applyNewEvent(clientUpdatedEvent);
   }
 

@@ -8,8 +8,8 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 @Provider
-public class OptimisticLockingExceptionMapper implements
-    ExceptionMapper<OptimisticLockingException> {
+public class OptimisticLockingExceptionMapper
+    implements ExceptionMapper<OptimisticLockingException> {
 
   @Override
   public Response toResponse(OptimisticLockingException exception) {

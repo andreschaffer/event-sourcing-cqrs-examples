@@ -26,9 +26,8 @@ public class AccountService {
     this.eventStore = checkNotNull(eventStore);
     this.eventBus = checkNotNull(eventBus);
     int maxAttempts = 3;
-    this.conflictRetrier = new Retrier(
-        singletonList(OptimisticLockingException.class),
-        maxAttempts);
+    this.conflictRetrier =
+        new Retrier(singletonList(OptimisticLockingException.class), maxAttempts);
   }
 
   public Optional<Account> loadAccount(UUID id) {
@@ -58,13 +57,15 @@ public class AccountService {
   private Account process(UUID accountId, Consumer<Account> consumer)
       throws AccountNotFoundException, OptimisticLockingException {
 
-    return conflictRetrier.get(() -> {
-      Optional<Account> possibleAccount = loadAccount(accountId);
-      Account account = possibleAccount.orElseThrow(() -> new AccountNotFoundException(accountId));
-      consumer.accept(account);
-      storeAndPublishEvents(account);
-      return account;
-    });
+    return conflictRetrier.get(
+        () -> {
+          Optional<Account> possibleAccount = loadAccount(accountId);
+          Account account =
+              possibleAccount.orElseThrow(() -> new AccountNotFoundException(accountId));
+          consumer.accept(account);
+          storeAndPublishEvents(account);
+          return account;
+        });
   }
 
   private void storeAndPublishEvents(Account account) throws OptimisticLockingException {

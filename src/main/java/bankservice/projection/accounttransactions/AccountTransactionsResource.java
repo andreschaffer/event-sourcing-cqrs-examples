@@ -23,8 +23,8 @@ public class AccountTransactionsResource {
 
   @GET
   public Response get(@PathParam("id") UUID accountId) {
-    List<TransactionProjection> transactionProjections = transactionsRepository
-        .listByAccount(accountId);
+    List<TransactionProjection> transactionProjections =
+        transactionsRepository.listByAccount(accountId);
     return Response.ok(transactionProjections).build();
   }
 }

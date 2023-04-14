@@ -51,7 +51,8 @@ class AccountServiceTest {
     doThrow(OptimisticLockingException.class)
         .doThrow(OptimisticLockingException.class)
         .doCallRealMethod()
-        .when(eventStore).store(eq(id), anyList(), anyInt());
+        .when(eventStore)
+        .store(eq(id), anyList(), anyInt());
 
     accountService.process(new WithdrawAccountCommand(id, ONE));
     int creationAttempts = 1;

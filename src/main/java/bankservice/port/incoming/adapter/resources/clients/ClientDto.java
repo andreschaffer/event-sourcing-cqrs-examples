@@ -11,12 +11,9 @@ public class ClientDto {
   @JsonProperty(access = READ_ONLY)
   private UUID id;
 
-  @NotBlank
-  private String name;
+  @NotBlank private String name;
 
-  @Email
-  private String email;
-
+  @Email private String email;
 
   @SuppressWarnings("unused")
   public UUID getId() {

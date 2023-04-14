@@ -20,13 +20,17 @@ public class InMemoryEventStore implements EventStore {
   @Override
   public void store(UUID aggregateId, List<Event> newEvents, int baseVersion)
       throws OptimisticLockingException {
-    eventStore.merge(aggregateId, newEvents, (oldValue, value) -> {
-      if (baseVersion != oldValue.get(oldValue.size() - 1).getVersion()) {
-        throw new OptimisticLockingException("Base version does not match current stored version");
-      }
+    eventStore.merge(
+        aggregateId,
+        newEvents,
+        (oldValue, value) -> {
+          if (baseVersion != oldValue.get(oldValue.size() - 1).getVersion()) {
+            throw new OptimisticLockingException(
+                "Base version does not match current stored version");
+          }
 
-      return Stream.concat(oldValue.stream(), value.stream()).collect(toList());
-    });
+          return Stream.concat(oldValue.stream(), value.stream()).collect(toList());
+        });
   }
 
   @Override

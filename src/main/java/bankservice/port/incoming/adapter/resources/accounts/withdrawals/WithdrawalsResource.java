@@ -33,8 +33,8 @@ public class WithdrawalsResource {
   public Response post(@PathParam("id") UUIDParam accountId, @Valid WithdrawalDto withdrawalDto)
       throws AccountNotFoundException, OptimisticLockingException {
 
-    WithdrawAccountCommand command = new WithdrawAccountCommand(accountId.get(),
-        withdrawalDto.getAmount());
+    WithdrawAccountCommand command =
+        new WithdrawAccountCommand(accountId.get(), withdrawalDto.getAmount());
     try {
       accountService.process(command);
     } catch (NonSufficientFundsException e) {

@@ -27,17 +27,20 @@ public abstract class Aggregate {
     checkNotNull(id);
     checkNotNull(eventStream);
     this.id = id;
-    eventStream.forEach(e -> {
-      apply(e);
-      this.baseVersion = e.getVersion();
-    });
+    eventStream.forEach(
+        e -> {
+          apply(e);
+          this.baseVersion = e.getVersion();
+        });
     this.newEvents = new ArrayList<>();
   }
 
   protected void applyNewEvent(Event event) {
-    checkArgument(event.getVersion() == getNextVersion(),
+    checkArgument(
+        event.getVersion() == getNextVersion(),
         "New event version '%s' does not match expected next version '%s'",
-        event.getVersion(), getNextVersion());
+        event.getVersion(),
+        getNextVersion());
     apply(event);
     newEvents.add(event);
   }

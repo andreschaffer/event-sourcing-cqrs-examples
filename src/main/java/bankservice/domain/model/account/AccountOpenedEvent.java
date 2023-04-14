@@ -12,8 +12,8 @@ public class AccountOpenedEvent extends Event {
   private final String clientId;
   private final BigDecimal balance;
 
-  public AccountOpenedEvent(UUID aggregateId, ZonedDateTime timestamp, int version, UUID clientId,
-      BigDecimal balance) {
+  public AccountOpenedEvent(
+      UUID aggregateId, ZonedDateTime timestamp, int version, UUID clientId, BigDecimal balance) {
     super(aggregateId, timestamp, version);
     this.clientId = checkNotNull(clientId).toString();
     this.balance = checkNotNull(balance);

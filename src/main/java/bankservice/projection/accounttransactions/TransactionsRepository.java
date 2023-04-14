@@ -8,5 +8,4 @@ public interface TransactionsRepository {
   void save(TransactionProjection transactionProjection);
 
   List<TransactionProjection> listByAccount(UUID accountId);
-
 }

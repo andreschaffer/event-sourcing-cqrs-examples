@@ -172,32 +172,17 @@
       </plugin>
 
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>3.2.1</version>
-        <configuration>
-          <encoding>UTF-8</encoding>
-          <consoleOutput>true</consoleOutput>
-          <failsOnError>true</failsOnError>
-          <violationSeverity>warning</violationSeverity>
-          <includeTestSourceDirectory>true</includeTestSourceDirectory>
-          <configLocation>
-            ${project.basedir}/src/main/resources/checkstyle/google_checks.xml
-          </configLocation>
-          <suppressionsLocation>
-            ${project.basedir}/src/main/resources/checkstyle/suppressions.xml
-          </suppressionsLocation>
-        </configuration>
+        <groupId>com.spotify.fmt</groupId>
+        <artifactId>fmt-maven-plugin</artifactId>
+        <version>2.19</version>
         <executions>
-          <execution>
-            <id>validate</id>
-            <phase>validate</phase>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
+            <execution>
+                <goals>
+                    <goal>format</goal>
+                </goals>
+            </execution>
         </executions>
-      </plugin>
+    </plugin>
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

@@ -11,8 +11,7 @@ import org.junit.jupiter.api.Test;
 
 class InMemoryAccountsRepositoryTest {
 
-  private AccountsRepository accountsRepository =
-      new InMemoryAccountsRepository();
+  private AccountsRepository accountsRepository = new InMemoryAccountsRepository();
 
   @Test
   void ignoreEventOutOfOrder() {

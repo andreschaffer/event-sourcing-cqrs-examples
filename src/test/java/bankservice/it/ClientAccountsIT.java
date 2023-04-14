@@ -24,7 +24,8 @@ class ClientAccountsIT extends BaseIT {
     String accountId2 = stateSetup.newAccountWithBalance(clientId, BigDecimal.valueOf(100));
     String accountId3 = stateSetup.newAccountWithBalance(clientId, BigDecimal.valueOf(100));
     resourcesClient.postWithdrawal(accountId2, resourcesDtos.withdrawalDto(TEN)).close();
-    resourcesClient.postDeposit(accountId3, resourcesDtos.depositDto(BigDecimal.valueOf(0.01)))
+    resourcesClient
+        .postDeposit(accountId3, resourcesDtos.depositDto(BigDecimal.valueOf(0.01)))
         .close();
 
     Map<String, BigDecimal> expectedAccountsBalances = new HashMap<>();
@@ -34,15 +35,16 @@ class ClientAccountsIT extends BaseIT {
     verifyClientAccounts(clientId, expectedAccountsBalances);
   }
 
-  private void verifyClientAccounts(String clientId,
-      Map<String, BigDecimal> expectedAccountsBalances) {
+  private void verifyClientAccounts(
+      String clientId, Map<String, BigDecimal> expectedAccountsBalances) {
     Response response = resourcesClient.getClientAccounts(clientId);
     ArrayNode accounts = response.readEntity(ArrayNode.class);
 
-    accounts.forEach(account -> {
-      String accountId = account.get("accountId").asText();
-      BigDecimal balance = new BigDecimal(account.get("balance").asText());
-      assertThat(balance, equalTo(expectedAccountsBalances.get(accountId)));
-    });
+    accounts.forEach(
+        account -> {
+          String accountId = account.get("accountId").asText();
+          BigDecimal balance = new BigDecimal(account.get("balance").asText());
+          assertThat(balance, equalTo(expectedAccountsBalances.get(accountId)));
+        });
   }
 }
