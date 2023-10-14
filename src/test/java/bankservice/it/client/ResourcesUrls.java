@@ -1,8 +1,8 @@
 package bankservice.it.client;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static jakarta.ws.rs.core.UriBuilder.fromUri;
 import static java.lang.String.format;
-import static javax.ws.rs.core.UriBuilder.fromUri;
 
 import java.net.URI;
 import org.glassfish.jersey.uri.UriTemplate;

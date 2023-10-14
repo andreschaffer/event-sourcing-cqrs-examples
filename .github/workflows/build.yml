@@ -19,7 +19,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3.13.0
         with:
-          java-version: 14
+          java-version: 19
           distribution: 'adopt'
 
       - name: Cache

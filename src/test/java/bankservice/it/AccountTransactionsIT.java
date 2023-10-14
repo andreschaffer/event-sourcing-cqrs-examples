@@ -9,8 +9,8 @@ import static org.hamcrest.Matchers.notNullValue;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import jakarta.ws.rs.core.Response;
 import java.math.BigDecimal;
-import javax.ws.rs.core.Response;
 import org.junit.jupiter.api.Test;
 
 class AccountTransactionsIT extends BaseIT {

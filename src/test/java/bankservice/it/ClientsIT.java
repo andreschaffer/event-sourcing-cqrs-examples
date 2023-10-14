@@ -5,8 +5,8 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import jakarta.ws.rs.core.Response;
 import java.util.ArrayList;
-import javax.ws.rs.core.Response;
 import org.glassfish.jersey.uri.UriTemplate;
 import org.junit.jupiter.api.Test;
 

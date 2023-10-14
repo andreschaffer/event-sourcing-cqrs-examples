@@ -1,17 +1,17 @@
 package bankservice.it;
 
+import static jakarta.ws.rs.core.UriBuilder.fromUri;
 import static java.util.logging.Level.INFO;
 import static java.util.logging.Logger.getLogger;
-import static javax.ws.rs.core.UriBuilder.fromUri;
 import static org.glassfish.jersey.logging.LoggingFeature.DEFAULT_LOGGER_NAME;
 import static org.glassfish.jersey.logging.LoggingFeature.Verbosity.PAYLOAD_ANY;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 import io.dropwizard.client.JerseyClientBuilder;
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.core.Response;
 import java.net.URI;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.core.Response;
 import org.glassfish.jersey.logging.LoggingFeature;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

@@ -6,7 +6,7 @@ import bankservice.bootstrap.BankServiceApplication;
 import bankservice.it.client.ResourcesClient;
 import bankservice.it.client.ResourcesDtos;
 import bankservice.it.setup.StateSetup;
-import io.dropwizard.Configuration;
+import io.dropwizard.core.Configuration;
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
 import org.junit.jupiter.api.BeforeAll;
