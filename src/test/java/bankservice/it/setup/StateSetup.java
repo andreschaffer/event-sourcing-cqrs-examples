@@ -8,10 +8,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import bankservice.it.client.ResourcesClient;
 import bankservice.it.client.ResourcesDtos;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import jakarta.ws.rs.core.Response;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
-import javax.ws.rs.core.Response;
 import org.glassfish.jersey.uri.UriTemplate;
 
 public class StateSetup {

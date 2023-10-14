@@ -3,9 +3,9 @@ package bankservice.port.incoming.adapter.resources.accounts.withdrawals;
 import static com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.UUID;
-import javax.validation.constraints.NotNull;
 
 public class WithdrawalDto {
 

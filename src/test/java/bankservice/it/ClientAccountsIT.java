@@ -6,11 +6,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import jakarta.ws.rs.core.Response;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import javax.ws.rs.core.Response;
 import org.junit.jupiter.api.Test;
 
 class ClientAccountsIT extends BaseIT {

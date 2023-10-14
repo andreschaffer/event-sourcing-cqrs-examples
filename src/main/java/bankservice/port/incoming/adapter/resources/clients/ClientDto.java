@@ -3,8 +3,8 @@ package bankservice.port.incoming.adapter.resources.clients;
 import static com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotBlank;
 import java.util.UUID;
-import javax.validation.constraints.NotBlank;
 
 public class ClientDto {
 

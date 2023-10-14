@@ -4,8 +4,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import jakarta.ws.rs.core.Response;
 import java.util.ArrayList;
-import javax.ws.rs.core.Response;
 import org.glassfish.jersey.uri.UriTemplate;
 import org.junit.jupiter.api.Test;
 
