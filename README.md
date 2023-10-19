@@ -115,7 +115,7 @@ Check the created account in the response's 'Location' header.
 #### Make a deposit to the account
 ` curl -v -X POST -H "Content-Type: application/json" -d '{"amount":1000000}' http://localhost:8080/accounts/{ACCOUNT_ID}/deposits `
 
-#### Check that you created a millionare!
+#### Check that you created a millionaire!
 ` curl -v http://localhost:8080/accounts/{ACCOUNT_ID} `
 
 #### More operations
