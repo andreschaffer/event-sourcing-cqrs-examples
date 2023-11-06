@@ -13,7 +13,7 @@
     <dropwizard.version>4.0.3</dropwizard.version>
     <jersey.version>3.0.11</jersey.version>
     <jakarta.version>2.1.1</jakarta.version>
-    <junit.version>5.10.0</junit.version>
+    <junit.version>5.10.1</junit.version>
     <error_prone.version>2.23.0</error_prone.version>
     <mvn-test-plugins.version>3.2.1</mvn-test-plugins.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
