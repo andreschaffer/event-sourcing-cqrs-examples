@@ -15,7 +15,7 @@
     <jakarta.version>2.1.1</jakarta.version>
     <junit.version>5.10.1</junit.version>
     <error_prone.version>2.23.0</error_prone.version>
-    <mvn-test-plugins.version>3.2.1</mvn-test-plugins.version>
+    <mvn-test-plugins.version>3.2.2</mvn-test-plugins.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <argLine>--add-opens java.base/java.math=ALL-UNNAMED
