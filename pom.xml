@@ -11,7 +11,7 @@
   <properties>
     <java.version>19</java.version>
     <dropwizard.version>4.0.7</dropwizard.version>
-    <jersey.version>3.1.5</jersey.version>
+    <jersey.version>3.1.6</jersey.version>
     <jakarta.version>2.1.1</jakarta.version>
     <junit.version>5.10.2</junit.version>
     <error_prone.version>2.26.1</error_prone.version>
