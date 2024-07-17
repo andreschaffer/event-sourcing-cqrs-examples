@@ -14,7 +14,7 @@
     <jersey.version>3.1.7</jersey.version>
     <jakarta.version>2.1.1</jakarta.version>
     <junit.version>5.10.3</junit.version>
-    <error_prone.version>2.28.0</error_prone.version>
+    <error_prone.version>2.29.0</error_prone.version>
     <mvn-test-plugins.version>3.3.1</mvn-test-plugins.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
