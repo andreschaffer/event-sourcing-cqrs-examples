@@ -14,7 +14,7 @@
     <jersey.version>3.1.10</jersey.version>
     <jakarta.version>2.1.1</jakarta.version>
     <junit.version>5.11.4</junit.version>
-    <error_prone.version>2.34.0</error_prone.version>
+    <error_prone.version>2.38.0</error_prone.version>
     <mvn-test-plugins.version>3.5.3</mvn-test-plugins.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -160,6 +160,7 @@
           <compilerArgs>
             <arg>-XDcompilePolicy=simple</arg>
             <arg>-Xplugin:ErrorProne</arg>
+            <arg>--should-stop=ifError=FLOW</arg>
             <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED</arg>
             <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED</arg>
             <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED</arg>
