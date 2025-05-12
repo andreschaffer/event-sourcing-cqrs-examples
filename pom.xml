@@ -160,6 +160,7 @@
           <compilerArgs>
             <arg>-XDcompilePolicy=simple</arg>
             <arg>-Xplugin:ErrorProne</arg>
+            <arg>--should-stop=ifError=FLOW</arg>
             <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED</arg>
             <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED</arg>
             <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED</arg>
