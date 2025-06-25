@@ -10,7 +10,7 @@
 
   <properties>
     <java.version>19</java.version>
-    <dropwizard.version>4.0.10</dropwizard.version>
+    <dropwizard.version>4.0.14</dropwizard.version>
     <jersey.version>3.1.10</jersey.version>
     <jakarta.version>2.1.1</jakarta.version>
     <junit.version>5.13.2</junit.version>
