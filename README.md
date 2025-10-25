@@ -1,6 +1,6 @@
 [![Build](https://github.com/andreschaffer/event-sourcing-cqrs-examples/actions/workflows/build.yml/badge.svg)](https://github.com/andreschaffer/event-sourcing-cqrs-examples/actions/workflows/build.yml)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/299df5b2515003778612/test_coverage)](https://codeclimate.com/github/andreschaffer/event-sourcing-cqrs-examples/test_coverage)
-[![Maintainability](https://api.codeclimate.com/v1/badges/299df5b2515003778612/maintainability)](https://codeclimate.com/github/andreschaffer/event-sourcing-cqrs-examples/maintainability)
+[![Code Coverage](https://qlty.sh/gh/andreschaffer/projects/event-sourcing-cqrs-examples/coverage.svg)](https://qlty.sh/gh/andreschaffer/projects/event-sourcing-cqrs-examples)
+[![Maintainability](https://qlty.sh/gh/andreschaffer/projects/event-sourcing-cqrs-examples/maintainability.svg)](https://qlty.sh/gh/andreschaffer/projects/event-sourcing-cqrs-examples)
 [![Dependabot](https://img.shields.io/badge/Dependabot-enabled-blue?logo=dependabot)](https://docs.github.com/en/github/administering-a-repository/keeping-your-dependencies-updated-automatically)
 
 # Event Sourcing and CQRS Examples

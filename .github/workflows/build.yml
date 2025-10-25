@@ -9,6 +9,10 @@ on:
   pull_request:
     branches: [ master ]
 
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
 
   build:
@@ -35,14 +39,10 @@ jobs:
 
       - name: Code Coverage Report
         if: ${{ github.actor != 'dependabot[bot]' }}
-        env:
-          GIT_BRANCH: ${GITHUB_REF/refs\/heads\//}
-          JACOCO_SOURCE_PATH: src/main/java
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        run: |
-          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-          chmod +x ./cc-test-reporter
-          ./cc-test-reporter format-coverage -t jacoco target/site/jacoco/jacoco.xml -o coverage/unit.json
-          ./cc-test-reporter format-coverage -t jacoco target/site/jacoco-it/jacoco.xml -o coverage/it.json
-          ./cc-test-reporter sum-coverage coverage/*.json -p 2
-          ./cc-test-reporter upload-coverage
+        uses: qltysh/qlty-action/coverage@v2
+        with:
+          oidc: true
+          files: |
+            target/site/jacoco/jacoco.xml
+            target/site/jacoco-it/jacoco.xml
+          add-prefix: src/main/java/
