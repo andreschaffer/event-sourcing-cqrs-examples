@@ -45,4 +45,4 @@ jobs:
           files: |
             target/site/jacoco/jacoco.xml
             target/site/jacoco-it/jacoco.xml
-          add-prefix: src/main/java
+          add-prefix: src/main/java/
