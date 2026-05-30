@@ -11,13 +11,13 @@ If you want to brush up on the subject we suggest reading:
 - [https://martinfowler.com/eaaDev/EventSourcing.html](https://martinfowler.com/eaaDev/EventSourcing.html)
 - [https://martinfowler.com/bliki/CQRS.html](https://martinfowler.com/bliki/CQRS.html)
 
-## Domain overview
+## Domain Overview
 In this minimalistic bank, a _client_ can _open_ one or more _accounts_.  
 On each _account_, the _client_ can _deposit_ or _withdraw_ money.  
 The history of an _account's transactions_ is available to the _client_ as well as a summary of the _client's accounts_.
 
 ## Design choices
-### Architecture overview
+### Architecture Overview
       Event Store   Projections
         +----+        +----+
         |    |        |    |
@@ -48,14 +48,14 @@ For more information about it read [here](http://www.dossier-andreas.net/softwar
 
 #### Package by Feature
 For the Read Models, we chose the Package by Feature structure because we would not benefit from isolating the layers
-and instead we put all feature related parts close together. 
+and instead, we put all feature-related parts close together. 
 
 For more information about it read [here](http://www.javapractices.com/topic/TopicAction.do?Id=205).
 
 ### DDD and REST
-There has been a myth of DDD and REST being incompatible due to DDD being all about behaviour
-whereas REST is all about state.  
-In this project we followed both techniques quite strictly and hope that the result shows that they can be well combined.  
+There has been a myth of DDD and REST being incompatible due to DDD being all about behavior
+whereas REST is all about the state.  
+In this project, we followed both techniques quite strictly and hope that the result shows that they can be well combined.  
 Note: We did not include REST hypermedia controls as we believe it is a big subject in itself and didn't want to shift focus from Event Sourcing and CQRS.
 
 ### Event Sourcing and CQRS (finally!)
@@ -64,17 +64,17 @@ By the book, CQRS proposes a complete separation between the read/query and writ
 but that's not what we have here.
 The approach we've taken instead:
 - The writes/commands are all on the domain model side and processed by aggregates;
-- The reads/queries are both in the domain model side and in the read model side.
+- The reads/queries are both on the domain model side and in the read model side.
   - The queries in the domain model side are only allowed when the data we need is a single aggregate itself.
-    The reason being that we can only query the event store by aggregate id
-    and we can actually fulfill those queries by replaying that single aggregate events.
+    The reason is that we can only query the event store by aggregate id
+    and we can actually fulfill those queries by replaying those single aggregate events.
   - For any other kind of query, we don't want to compromise the domain model.
     Therefore, we create read models to fulfill those queries.
     They are basically projections, potentially built from different events and aggregates
     that can be queried by more appropriate fields. 
     
 #### Events
-Events are a thing from the past. It communicates a significant change that _happened_. 
+Events are a thing of the past. It communicates a significant change that _happened_. 
 
 ##### Idempotency when replaying events
 When replaying events, we don't want to execute any business logic because we can't change history. We only want to do assignments.  
@@ -83,7 +83,7 @@ the updated balance already available so that we can just assign it. This makes 
 
 ##### Ordering of events
 In a distributed world, event timestamps are unreliable for ordering - machines have their own clocks.  
-Instead we can make the ordering explicit with an event version.
+Instead, we can make the ordering explicit with an event version.
 In this project we use event versioning in two ways:
 - In the write/command side, we use it for protecting ourselves from race conditions via optimistic locking;
 - In the read/query side, we use it for commutative reasons, meaning events can come out of order and we can still handle them properly.
@@ -122,10 +122,10 @@ Check the created account in the response's 'Location' header.
 Go ahead and check the code! :)
 
 # Contributing
-If you would like to help making this project better, see the [CONTRIBUTING.md](CONTRIBUTING.md).  
+If you would like to help make this project better, see the [CONTRIBUTING.md](CONTRIBUTING.md).  
 
 # Maintainers
-Send any other comments, flowers and suggestions to [André Schaffer](https://github.com/andreschaffer) and [Dan Eidmark](https://github.com/daneidmark).
+Send any other comments, flowers, and suggestions to [André Schaffer](https://github.com/andreschaffer) and [Dan Eidmark](https://github.com/daneidmark).
 
 # License
 This project is distributed under the [MIT License](LICENSE).
