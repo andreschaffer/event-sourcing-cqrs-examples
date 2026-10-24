@@ -22,6 +22,21 @@ class WithdrawalsIT extends BaseIT {
   }
 
   @Test
+  void rejectNegativeAmount() {
+    BigDecimal previousBalance = BigDecimal.TEN;
+    String accountId = stateSetup.newAccountWithBalance(randomUUID().toString(), previousBalance);
+    Response response = resourcesClient.postWithdrawal(accountId,
+        resourcesDtos.withdrawalDto(BigDecimal.valueOf(-1)));
+    response.close();
+    assertThat(response.getStatus(), equalTo(422));
+
+    Response accountResponse = resourcesClient.getAccount(accountId);
+    JsonNode account = accountResponse.readEntity(JsonNode.class);
+    accountResponse.close();
+    assertThat(account.get("balance").asDouble(), equalTo(10.0));
+  }
+
+  @Test
   void withdrawAccount() {
     BigDecimal previousBalance = BigDecimal.valueOf(9.99);
     BigDecimal withdrawalAmount = BigDecimal.valueOf(5.55);
