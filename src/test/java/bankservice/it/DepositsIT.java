@@ -22,6 +22,20 @@ class DepositsIT extends BaseIT {
   }
 
   @Test
+  void rejectNegativeAmount() {
+    String accountId = stateSetup.newAccount(randomUUID().toString());
+    Response response = resourcesClient.postDeposit(accountId,
+        resourcesDtos.depositDto(BigDecimal.valueOf(-1)));
+    response.close();
+    assertThat(response.getStatus(), equalTo(422));
+
+    Response accountResponse = resourcesClient.getAccount(accountId);
+    JsonNode account = accountResponse.readEntity(JsonNode.class);
+    accountResponse.close();
+    assertThat(account.get("balance").asDouble(), equalTo(0.0));
+  }
+
+  @Test
   void depositAccount() {
     String accountId = stateSetup.newAccount(randomUUID().toString());
     BigDecimal amount = TEN;

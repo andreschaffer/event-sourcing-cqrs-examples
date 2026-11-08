@@ -4,6 +4,7 @@ import static com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.util.UUID;
 
@@ -13,6 +14,7 @@ public class DepositDto {
   private UUID accountId;
 
   @NotNull
+  @Positive
   private BigDecimal amount;
 
 
